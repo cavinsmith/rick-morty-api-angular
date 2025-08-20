@@ -29,6 +29,7 @@ loadLocationsPage$ = createEffect(() => this.actions$.pipe(
               locations: result.locations,
               page: page,
               totalPages: result.pages,
+              totalItems: result.items,
               filter: filter as LocationFilter
             }),
             LocationActions.loadLocationsSuccess({ 

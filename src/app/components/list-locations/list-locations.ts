@@ -6,8 +6,8 @@ import { LocationFilter } from 'rickmortyapi';
 @Component({
   selector: 'app-list-locations',
   imports: [GenericListPagesComponent],
-  templateUrl: './list-locations.component.html',
-  styleUrl: './list-locations.component.scss'
+  templateUrl: './list-locations.html',
+  styleUrl: './list-locations.scss'
 })
 export class ListLocations {
   locationsFacade = inject(LocationsPagesFacade);

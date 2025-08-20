@@ -10,6 +10,7 @@ export interface PaginationModel<T, F> {
   loadedPages: Set<number>;
   pages: { [key: number]: T[] };
   totalPages: number;
+  totalItems: number;
   loading: boolean;
   filter: F;
   error: any;
@@ -19,6 +20,7 @@ export const PAGINATION_INITIAL_STATE = {
   loadedPages: new Set<number>(),
   pages: {},
   totalPages: 0,
+  totalItems: 0,
   loading: false,
   filter: {},
   error: null,
@@ -39,7 +41,7 @@ export const episodesPagesReducer = createReducer(
     error: null,
   })),
 
-  on(EpisodesPagesActions.loadEpisodesPagesSuccess, (state, { page, episodes, totalPages, filter }) => {
+  on(EpisodesPagesActions.loadEpisodesPagesSuccess, (state, { page, episodes, totalPages, totalItems, filter }) => {
     const currentState = isEqual(state.filter, filter) ? state : initialState;
     const newLoadedPages = new Set(currentState.loadedPages);
     newLoadedPages.add(page);
@@ -50,6 +52,7 @@ export const episodesPagesReducer = createReducer(
       error: null,
       loadedPages: newLoadedPages,
       totalPages,
+      totalItems,
       filter,
       pages: {
         ...currentState.pages,

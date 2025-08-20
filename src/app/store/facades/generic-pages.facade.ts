@@ -8,7 +8,7 @@ export abstract class GenericPagesFacade<T, F> {
   protected abstract loadAction: (params: { page: number, filter: F }) => any;
   protected abstract selectPage: (page: number, filter: F) => any;
   protected abstract selectPageIsLoaded: (page: number, filter: F) => any;
-  protected abstract selectTotalPages?: any;
+  protected abstract selectTotalPagesAndItems?: any;
 
   getPage(page: number, filter: F): Observable<T | undefined> {
     this.store.select(this.selectPageIsLoaded(page, filter)).pipe(
@@ -21,10 +21,10 @@ export abstract class GenericPagesFacade<T, F> {
     return this.store.select(this.selectPage(page, filter));
   }
 
-  getTotalPages(): Observable<number> {
-    if(!this.selectTotalPages) {
-      throw new Error('selectTotalPages is not implemented');
+  getTotalPagesAndItems(): Observable<{ totalPages: number, totalItems: number }> {
+    if(!this.selectTotalPagesAndItems) {
+      throw new Error('selectTotalPagesAndItems is not implemented');
     }
-    return this.store.select(this.selectTotalPages);
+    return this.store.select(this.selectTotalPagesAndItems);
   }
 }

@@ -17,9 +17,12 @@ export const selectLocationsPageIsLoaded = (page: number, filter: LocationFilter
   (state) => state.loadedPages.has(page) && isEqual(state.filter, filter)
 );
 
-export const selectLocationsTotalPages = createSelector(
+export const selectLocationsTotalPagesAndItems = createSelector(
   selectLocationsPagesState,
-  (state) => state.totalPages
+  (state) => ({
+    totalPages: state.totalPages,
+    totalItems: state.totalItems
+  })
 );
 
 export const selectLocationLoading = createSelector(

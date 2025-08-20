@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GenericPagesFacade } from './generic-pages.facade';
 import { Store } from '@ngrx/store';
 import * as LocationsPagesActions from '../actions/locations-pages.actions';
-import { selectLocationsPage, selectLocationsTotalPages, selectLocationsPageIsLoaded }  from '../selectors/locations-pages.selectors';
+import { selectLocationsPage, selectLocationsTotalPagesAndItems, selectLocationsPageIsLoaded }  from '../selectors/locations-pages.selectors';
 import { Location } from  '../models/location.model'
 import { LocationFilter } from 'rickmortyapi';
 
@@ -12,7 +12,7 @@ import { LocationFilter } from 'rickmortyapi';
 export class LocationsPagesFacade extends GenericPagesFacade<Location[], LocationFilter> {
   protected loadAction = LocationsPagesActions.loadLocationsPages;
   protected selectPage = selectLocationsPage;
-  protected selectTotalPages = selectLocationsTotalPages;
+  protected selectTotalPagesAndItems = selectLocationsTotalPagesAndItems;
   protected selectPageIsLoaded = selectLocationsPageIsLoaded;
 
   constructor(store: Store) {

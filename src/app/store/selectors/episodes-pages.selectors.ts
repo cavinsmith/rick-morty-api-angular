@@ -17,9 +17,12 @@ export const selectEpisodesPageIsLoaded = (page: number, filter: EpisodeFilter) 
   (state) => state.loadedPages.has(page) && isEqual(state.filter, filter)
 );
 
-export const selectEpisodesTotalPages = createSelector(
+export const selectEpisodesTotalPagesAndItems = createSelector(
   selectEpisodesPagesState,
-  (state) => state.totalPages
+  (state) => ({
+    totalPages: state.totalPages,
+    totalItems: state.totalItems
+  })
 );
 
 /*
