@@ -1,0 +1,18 @@
+@if (character) {
+    <mat-card class="character-card">
+      <mat-card-header>
+          <div mat-card-avatar class="character-header-image" [ngStyle]="{'background-image': 'url(' + character.image + ')'}"></div>
+          <mat-card-title>{{character.name}}</mat-card-title>
+          <mat-card-subtitle>{{character.species}}</mat-card-subtitle>
+      </mat-card-header>
+      <div mat-card-image class="character-image" [ngStyle]="{'background-image': 'url(' + character.image + ')'}"></div>
+      <mat-card-content>
+          <p>
+          Status: {{character.status}}<br>
+          Gender: {{character.gender}}<br>
+          Origin: {{character.origin.name}}<br>
+          Location: {{character.location.name}}<br>
+          </p>
+      </mat-card-content>
+    </mat-card>
+}
