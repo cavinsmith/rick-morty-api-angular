@@ -6,10 +6,11 @@ import { Character } from '../../store/models/character.model';
 import { Location } from '../../store/models/location.model';
 import { CharacterCard } from '../character-card/character-card';
 import { LocationsFacade } from '../../store/facades/locations.facade';
+import { ListLocations } from '../list-locations/list-locations.component';
 
 @Component({
   selector: 'app-api-test',
-  imports: [CommonModule, CharacterCard],
+  imports: [CommonModule, CharacterCard, ListLocations],
   templateUrl: './api-test.html',
   styleUrl: './api-test.scss'
 })
