@@ -7,16 +7,21 @@ import { Location } from '../../store/models/location.model';
 import { CharacterCard } from '../character-card/character-card';
 import { LocationsFacade } from '../../store/facades/locations.facade';
 import { ListLocations } from '../list-locations/list-locations.component';
+import { Search } from '../search/search';
+import { EpisodesPagesFacade } from '../../store/facades/episodes-pages.facade';
+import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 
 @Component({
   selector: 'app-api-test',
-  imports: [CommonModule, CharacterCard, ListLocations],
+  imports: [CommonModule, CharacterCard, ListLocations, Search],
   templateUrl: './api-test.html',
   styleUrl: './api-test.scss'
 })
 export class ApiTest implements OnInit {
   charactersFacade = inject(CharactersFacade);
   locationsFacade = inject(LocationsFacade);
+  episodesPagesFacade = inject(EpisodesPagesFacade);
+  locationsPagesFacade = inject(LocationsPagesFacade);  
 
   characters$!: Observable<Character[] | undefined>;
   location$!: Observable<Location | undefined>;
