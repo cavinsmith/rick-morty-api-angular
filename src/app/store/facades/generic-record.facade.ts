@@ -6,8 +6,10 @@ export abstract class GenericRecordFacade<T> {
 
   protected abstract loadAction: (params: { id: number }) => any;
   protected abstract selectRecord: (id: number) => any;
-  protected abstract loadManyAction: (params: { ids: number[] }) => any;
-  protected abstract selectManyRecords: (ids: number[]) => any;
+  // how to make them optional in implementation?:
+
+  protected loadManyAction?: (params: { ids: number[] }) => any;
+  protected selectManyRecords?: (ids: number[]) => any;
 
   getRecord(id: number): Observable<T | undefined> {
     this.store.select(this.selectRecord(id)).pipe(
@@ -23,6 +25,12 @@ export abstract class GenericRecordFacade<T> {
   }
 
   getRecords(ids: number[]): Observable<(T | undefined)[]> {
+    if(!this.selectManyRecords) {
+      throw new Error('selectManyRecords is not implemented');
+    }
+    if(!this.loadManyAction) {
+      throw new Error('loadManyAction is not implemented');
+    }
     this.store.select(this.selectManyRecords(ids)).pipe(
       take(1)
     ).subscribe((items ) => {
@@ -33,7 +41,7 @@ export abstract class GenericRecordFacade<T> {
           missingIds.push(ids[i]);
         }
       }
-      if (missingIds.length) {
+      if (missingIds.length && this.loadManyAction) {
         this.store.dispatch(this.loadManyAction({ ids: missingIds }));
       }
     });

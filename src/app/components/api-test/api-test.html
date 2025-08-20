@@ -9,3 +9,13 @@
   }
 }
 </div>
+
+<div class="card-wrapper">
+@if (location$ | async; as location) {
+  <div>
+    Name: {{ location.name }}<br>
+    Type: {{ location.type }}<br>
+    Dimension: {{ location.dimension }}<br>    
+  </div>
+}
+</div>
