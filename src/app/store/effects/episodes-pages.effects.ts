@@ -29,6 +29,7 @@ loadEpisodesPage$ = createEffect(() => this.actions$.pipe(
               episodes: result.episodes,
               page: page,
               totalPages: result.pages,
+              totalItems: result.items,
               filter: filter as EpisodeFilter
             }),
             EpisodeActions.loadEpisodesSuccess({ 

@@ -18,12 +18,12 @@ export class GenericListPagesComponent<T, F> implements OnInit, OnChanges {
   @ContentChild('itemTemplate') itemTemplate!: TemplateRef<any>;
 
   currentPage: number = 1;
-  totalPages$!: Observable<number>;
+  totalPagesAndItems$!: Observable<{ totalPages: number, totalItems: number } >;
   items$!: Observable<T | undefined>;
 
   ngOnInit() {
     this.currentPage = this.initialPage;
-    this.totalPages$ = this.pagesFacade.getTotalPages();
+    this.totalPagesAndItems$ = this.pagesFacade.getTotalPagesAndItems();
 
     this.updatePage();
   }
