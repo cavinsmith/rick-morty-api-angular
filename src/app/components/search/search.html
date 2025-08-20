@@ -1,0 +1,19 @@
+<div class="search-container">
+  <mat-form-field class="search-field">
+    <mat-label>Search by {{searchName}}</mat-label>
+    <input 
+      type="text"
+      matInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"      
+      placeholder="Start typing {{searchName}}...">
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (option of items$ | async; track option) {
+        <mat-option [value]="option.value" (onSelectionChange)="onSelect(option)">
+          {{option.value}}
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+</div>
