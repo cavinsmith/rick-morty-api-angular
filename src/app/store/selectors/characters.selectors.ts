@@ -1,6 +1,7 @@
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CharactersState } from '../state/app.state';
+import { Character } from '../models/character.model';
 
 export const selectCharactersPagesState = createFeatureSelector<CharactersState>('characters');
 
@@ -12,6 +13,16 @@ export const selectCharacters = createSelector(
 export const selectCharacter = (id: number) => createSelector(
   selectCharactersPagesState,
   (state) => state.characters[id]
+);
+
+export const selectMultipleCharacters = (ids: number[]) => createSelector(
+  selectCharactersPagesState,
+  (state) => {
+    return ids.reduce((acc, id) => {
+      acc[id] = { ...state.characters[id] } ;
+      return acc;
+    }, {} as { [id: number]: Character });
+  }
 );
 
 export const selectCharacterLoading = createSelector(

@@ -1,3 +1,5 @@
 import { Routes } from '@angular/router';
-
-export const routes: Routes = [];
+import { ApiTest } from './components/api-test/api-test';
+export const routes: Routes = [
+  { path: '', component: ApiTest }
+  ];
