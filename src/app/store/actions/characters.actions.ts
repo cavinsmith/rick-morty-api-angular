@@ -6,6 +6,12 @@ export const loadCharacter = createAction(
   props<{ id: number }>()
 );
 
+export const loadCharacters = createAction(
+  '[Characters] Load Characters',
+  props<{ ids: number[] }>()
+);
+
+
 export const loadCharacterSuccess = createAction(
   '[Characters] Load Character Success',
   props<{ character: Character }>()
@@ -20,3 +26,9 @@ export const loadCharacterFailure = createAction(
   '[Characters] Load Character Failure',
   props<{ error: string }>()
 );
+
+export const loadCharactersFailure = createAction(
+  '[Characters] Load Characters Failure',
+  props<{ error: string }>()
+);
+
