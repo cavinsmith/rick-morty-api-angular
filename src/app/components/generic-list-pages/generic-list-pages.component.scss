@@ -1,0 +1,13 @@
+.pagination-controls {
+  margin: 16px 0;
+}
+
+.pagination-controls button {
+  margin: 0 8px;
+  padding: 8px 16px;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

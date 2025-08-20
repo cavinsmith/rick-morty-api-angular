@@ -1,0 +1,27 @@
+@if (items$ | async; as items) {
+
+    @for (item of (items ?? []); track item.name) {
+        <ng-container 
+            *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+        </ng-container>
+    }
+    
+} @else {
+    <p>Loading...</p>
+}
+
+@if (totalPages$ | async; as totalPages) {
+    <div class="pagination-controls">
+        Page {{ currentPage }} / {{ totalPages }}<br/>
+        <button (click)="onPreviousPage()" [disabled]="currentPage <= 1">Previous</button>
+        <button (click)="onNextPage()" [disabled]="currentPage >= totalPages">Next</button>
+    </div>
+
+    <mat-paginator
+        [length]="totalPages$ | async"
+        [pageSize]="1"
+        aria-label="Select page"
+        [pageIndex]="currentPage - 1"
+        (page)="onPageChange($event)">
+    </mat-paginator>
+}
