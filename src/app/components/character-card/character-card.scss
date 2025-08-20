@@ -1,0 +1,19 @@
+.character-card {
+  max-width: 200px;
+  min-width: 300px;
+  overflow: hidden;
+}
+
+.character-header-image {
+  background-size: cover;
+}
+
+.character-image {
+  display: block;
+  padding: 24px;
+  width: 100%;
+  background-size: cover;
+  height: 200px;
+  // shadow
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

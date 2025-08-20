@@ -1,13 +1,11 @@
+
+<button (click)="previousCharacter()">Previous -1</button>
+<button (click)="nextCharacter()">Next +2</button>
+
+<div class="card-wrapper">
 @if (characters$ | async; as characters) {
   @for (character of characters; track character.name) {
-    <div>
-      <h2>{{ character.name }}</h2>
-      <p>Status: {{ character.status }}</p>
-      <p>Species: {{ character.species }}</p>
-      <p>Gender: {{ character.gender }}</p>
-    </div>
+    <app-character-card [character]="character"></app-character-card>
   }
 }
-
-<button (click)="previousCharacter()">Previous</button>
-<button (click)="nextCharacter()">Next</button>
+</div>

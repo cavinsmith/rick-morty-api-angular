@@ -3,10 +3,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CharactersFacade } from '../../store/facades/characters.facade';
 import { map, Observable } from 'rxjs';
 import { Character } from '../../store/models/character.model';
+import { CharacterCard } from '../character-card/character-card';
 
 @Component({
   selector: 'app-api-test',
-  imports: [CommonModule],
+  imports: [CommonModule, CharacterCard],
   templateUrl: './api-test.html',
   styleUrl: './api-test.scss'
 })
