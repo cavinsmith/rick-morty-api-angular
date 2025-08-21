@@ -37,3 +37,23 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+    font-family: 'Get Schwifty';
+    src: url('assets/fonts/GetSchwifty-Regular.woff2') format('woff2'),
+         url('assets/fonts/GetSchwifty-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+  --rick-pink: #c19db1;
+  --morty-white: #fcfcfd;
+  --rick-brown: #724b45;
+  --morty-green: #92b06a;
+  --rick-black: #1f1d20;
+  --morty-coral: #ce6775;
+  --rick-teal: #3e5a5a;
+  --morty-lime: #e3e65c;
+}

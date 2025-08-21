@@ -1,3 +1,37 @@
+.toolbar {
+  background-color: black;
+  color: white;
+}
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.toolbar-icon {
+  background-color: var(--rick-teal);
+  color: var(--morty-lime);
+  box-shadow: 4px 4px 0 transparent
+}
+
+.toolbar-icon:hover {
+  box-shadow: 4px 4px 0 var(--morty-lime)
+}
+
+.active-icon {
+  background-color: var(--morty-coral);
+  color: var(--morty-white);
+  box-shadow: 4px 4px 0 var(--morty-lime);
+}
+
+a, .toolbar-logo {
+  font-family: 'Get Schwifty', sans-serif;
+  font-size: 16px;
+}
+
+a {
+  padding: 2px 12px;
+}
+
+a, a:hover, a:active {
+  text-decoration: none;
+}
+

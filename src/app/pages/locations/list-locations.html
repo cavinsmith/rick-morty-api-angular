@@ -1,0 +1,9 @@
+<button (click)="setDimension('C-137')">Filter by Dimension C-137</button>
+<button (click)="setLocationName('Earth')">Filter by Earth</button>
+
+<app-generic-list [pagesFacade]="locationsFacade" [initialPage]="initialPage" [filter]="filter">
+    <ng-template #itemTemplate let-location>
+        <p>Location: {{location.name}}</p>
+    </ng-template>
+</app-generic-list>
+
