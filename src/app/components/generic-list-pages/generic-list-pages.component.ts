@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 import { Observable } from 'rxjs';
 import { isEqual } from 'lodash';
+import { Portal } from "../portal/portal";
 
 @Component({
   selector: 'app-generic-list',
-  imports: [CommonModule, MatPaginatorModule],
+  imports: [CommonModule, MatPaginatorModule, Portal],
   templateUrl: './generic-list-pages.component.html',
   styleUrl: './generic-list-pages.component.scss'
 })

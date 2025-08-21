@@ -58,5 +58,30 @@ body { margin: 0; font-family: Atma, "Helvetica Neue", sans-serif; }
   --morty-lime: #e3e65c;
   --mat-card-title-text-font: 'Get Schwifty', sans-serif;
   --mat-paginator-container-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-form-field-container-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-form-field-filled-label-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-option-label-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-form-field-filled-container-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-autocomplete-container-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-card-subtitle-text-font: 'Atma', Helvetica, sans-serif;
+
   --mat-paginator-container-text-size: 24px;
+  --mat-form-field-filled-container-shape: 0;
+  --mat-autocomplete-container-shape: 0;
+  --mat-form-field-container-shape: 0;
+  --mat-form-field-filled-container-shape: 0;
+  --mat-autocomplete-container-shape: 0;
+  --mat-form-field-filled-container-color: var(--morty-lime);
+  --mat-form-field-container-color: var(--morty-lime);
+  --mat-autocomplete-container-color: var(--morty-lime);
+  --mat-form-field-filled-label-text-color: var(--morty-black);
+  --mat-autocomplete-background-color: var(--morty-coral);
+  --mat-option-selected-state-layer-color: var(--morty-lime);
+  --mat-sys-surface: var(--morty-white);
+  --mat-option-label-text-color: var(--morty-white);
+  --mat-card-elevated-container-color: var(--morty-lime);
+  --mat-card-elevated-container-shape: 0;
+
 }
+
+

@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 })
 export class Link 
 {
-  @Input() link: string[] = ['/'];
+  @Input() link: (string | number)[] = ['/'];
   @Input() text: string = 'link';
 
 }

@@ -3,8 +3,8 @@ import { CharactersPagesFacade } from '../../store/facades/characters-pages.faca
 import { GenericListPagesComponent } from '../../components/generic-list-pages/generic-list-pages.component';
 import { Title } from '../../components/title/title';
 import { Text } from '../../components/text/text';
-import * as routeConstants from '../../constants/routes';
 import { Link } from '../../components/link/link';
+import * as routeConstants from '../../constants/routes';
 
 @Component({
   selector: 'app-page-characters',

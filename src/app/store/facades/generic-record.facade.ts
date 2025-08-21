@@ -24,7 +24,7 @@ export abstract class GenericRecordFacade<T> {
     return this.store.select(this.selectRecord(id));
   }
 
-  getRecords(ids: number[]): Observable<(T | undefined)[]> {
+  getRecords(ids: number[]): Observable<T[]> {
     if(!this.selectManyRecords) {
       throw new Error('selectManyRecords is not implemented');
     }
@@ -33,11 +33,12 @@ export abstract class GenericRecordFacade<T> {
     }
     this.store.select(this.selectManyRecords(ids)).pipe(
       take(1)
-    ).subscribe((items ) => {
-      const typedItems = items as { [key: number]: T | undefined };
+    ).subscribe((items) => {
+      const typedItems = items as {id: number}[]  ;
+      const existingIds = typedItems.map(item => item.id);
       let missingIds: number[] = [];
       for (let i = 0; i < ids.length; i++) {
-        if (typedItems[ids[i]]) {
+        if (!existingIds.includes(ids[i])) {
           missingIds.push(ids[i]);
         }
       }

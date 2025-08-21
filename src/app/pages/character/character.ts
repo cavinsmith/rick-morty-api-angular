@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 import { Title } from "../../components/title/title";
 import { Text } from "../../components/text/text";
-
 @Component({
   selector: 'app-page-character',
   imports: [CommonModule, Title, Text],
