@@ -6,11 +6,9 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './link.html',
-  styleUrls: ['./link.scss']
+  styleUrls: ['./link.scss'],
 })
-export class Link 
-{
+export class Link {
   @Input() link: (string | number)[] = ['/'];
-  @Input() text: string = 'link';
-
+  @Input() text = 'link';
 }

@@ -14,34 +14,44 @@ export class EpisodesPagesEffects {
   private apiService = inject(ApiService);
   private store = inject(Store);
 
-loadEpisodesPage$ = createEffect(() => this.actions$.pipe(
-    ofType(EpisodesPagesActions.loadEpisodesPages),
-    withLatestFrom(
-      this.actions$.pipe(
-        ofType(EpisodesPagesActions.loadEpisodesPages),
-        switchMap(action => this.store.select(selectEpisodesPageIsLoaded(action.page, action.filter)))
-      )
+  loadEpisodesPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EpisodesPagesActions.loadEpisodesPages),
+      withLatestFrom(
+        this.actions$.pipe(
+          ofType(EpisodesPagesActions.loadEpisodesPages),
+          switchMap((action) =>
+            this.store.select(selectEpisodesPageIsLoaded(action.page, action.filter)),
+          ),
+        ),
+      ),
+      mergeMap(([{ page, filter }, pageIsLoaded]) =>
+        pageIsLoaded
+          ? EMPTY
+          : from(this.apiService.getEpisodes(page, filter)).pipe(
+              mergeMap((result) =>
+                from([
+                  EpisodesPagesActions.loadEpisodesPagesSuccess({
+                    episodes: result.episodes,
+                    page: page,
+                    totalPages: result.pages,
+                    totalItems: result.items,
+                    filter: filter as EpisodeFilter,
+                  }),
+                  EpisodeActions.loadEpisodesSuccess({
+                    episodes: result.episodes,
+                  }),
+                ]),
+              ),
+              catchError((error) =>
+                of(
+                  EpisodesPagesActions.loadEpisodesPageFailure({
+                    error: error.message,
+                  }),
+                ),
+              ),
+            ),
+      ),
     ),
-    mergeMap(([{ page, filter }, pageIsLoaded]) => pageIsLoaded ? EMPTY : 
-        from(this.apiService.getEpisodes(page, filter)).pipe(
-          mergeMap((result) => from([
-            EpisodesPagesActions.loadEpisodesPagesSuccess({
-              episodes: result.episodes,
-              page: page,
-              totalPages: result.pages,
-              totalItems: result.items,
-              filter: filter as EpisodeFilter
-            }),
-            EpisodeActions.loadEpisodesSuccess({ 
-              episodes: result.episodes 
-            })
-          ])),
-          catchError((error) => of(EpisodesPagesActions.loadEpisodesPageFailure({ 
-            error: error.message 
-          })))
-        )
-      )
-    )
   );
-
 }

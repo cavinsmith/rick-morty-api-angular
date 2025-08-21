@@ -1,15 +1,16 @@
-
 import { Component, inject, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CharactersFacade } from '../../store/facades/characters.facade';
 import { Observable } from 'rxjs';
+import { Character as CharacterModel } from '../../store/models/character.model';
 
 import { CharacterCard } from '../../components/character-card/character-card';
+import { Loader } from '../../components/loader/loader';
 
 @Component({
   selector: 'app-page-character',
-  imports: [CommonModule, CharacterCard],
+  imports: [CommonModule, CharacterCard, Loader],
   templateUrl: './character.html',
   styleUrl: './character.scss',
 })
@@ -17,13 +18,13 @@ export class Character implements OnChanges, OnInit {
   charactersFacade = inject(CharactersFacade);
   route = inject(ActivatedRoute);
 
-  @Input() currentCharacter: number = 55;
+  @Input() currentCharacter = 55;
   @Input() id!: string;
 
-  character$!: Observable<any>;
+  character$!: Observable<CharacterModel | undefined>;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       if (params['id']) {
         this.currentCharacter = +params['id'];
         this.updateCharacter();

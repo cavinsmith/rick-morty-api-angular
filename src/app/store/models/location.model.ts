@@ -1,6 +1,6 @@
 export interface Location {
   id: number;
-  name: string;    
+  name: string;
   type: string;
   dimension: string;
   residents: string[];

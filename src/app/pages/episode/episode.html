@@ -1,10 +1,14 @@
-@if (episode$ | async; as episode) {
-  <app-title>{{episode.name}}</app-title>
-  <app-text>
-  Episode: {{episode.episode}}<br>
-  Dimension: {{episode.dimension}}<br>
-  Air Date: {{episode.air_date}}<br>
-  Characters partake: {{episode.characters.length }}<br>
-  </app-text>
-  <showcase-characters [characterIds]="episode.characters | paginate"></showcase-characters>
-}
+<app-loader [waitfor]="episode$">
+  @if (episode$ | async; as episode) {
+    <app-title>{{ episode.name }}</app-title>
+    <app-text>
+      Episode: {{ episode.episode }}<br />
+      Dimension: {{ episode.dimension }}<br />
+      Air Date: {{ episode.air_date }}<br />
+      Characters: {{ episode.characters.length }}<br />
+    </app-text>
+    <app-showcase-characters
+      [characterIds]="episode.characters | paginate"
+    ></app-showcase-characters>
+  }
+</app-loader>

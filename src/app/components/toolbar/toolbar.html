@@ -1,5 +1,8 @@
 <mat-toolbar class="toolbar">
-  <span class="toolbar-logo">R&M</span>
+  <div class="toolbar-portal">
+    <app-portal [size]="40"></app-portal>
+  </div>
+  <a routerLink="/" class="toolbar-logo">R&M</a>
   <span class="example-spacer"></span>
   @for (item of links; track $index) {
     <a [routerLink]="item.path" routerLinkActive="active-icon" class="toolbar-icon">

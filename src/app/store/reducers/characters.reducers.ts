@@ -6,7 +6,7 @@ import { CharacterObject, CharactersState } from '../state/app.state';
 export const initialState: CharactersState = {
   characters: {},
   loading: false,
-  error: null
+  error: null,
 };
 
 export const charactersReducer = createReducer(
@@ -26,10 +26,9 @@ export const charactersReducer = createReducer(
         [character.id]: character,
       },
       loading: false,
-      error: null,      
+      error: null,
     };
   }),
-
 
   on(CharacterActions.loadCharactersSuccess, (state, { characters }) => {
     return {
@@ -39,7 +38,7 @@ export const charactersReducer = createReducer(
         ...characters.reduce((acc: CharacterObject, item: Character) => {
           acc[item.id] = item;
           return acc;
-        }, {}), 
+        }, {}),
       },
       loading: false,
       error: null,
@@ -50,6 +49,5 @@ export const charactersReducer = createReducer(
     ...state,
     loading: false,
     error,
-  }))
+  })),
 );
-

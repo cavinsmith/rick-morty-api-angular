@@ -1,14 +1,11 @@
 <app-title>Dimensions</app-title>
 
-
-
+<app-loader [waitfor]="dimensions$">
 @if (dimensions$ | async; as dimensions) {
     @for (dimension of dimensions; track dimension.name) {
         <app-text>
           <app-link [link]="['/',dimensionsRoute, dimension.id]" [text]="dimension.name"></app-link>
         </app-text>
     }
-    
-} @else {
-    <app-portal></app-portal>   
-}
+}    
+</app-loader>

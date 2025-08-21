@@ -15,5 +15,5 @@ export const reducers: ActionReducerMap<AppState> = {
   dimensions: dimensionsReducer,
   locationsPages: locationsPagesReducer,
   episodes: episodesReducer,
-  episodesPages: episodesPagesReducer
+  episodesPages: episodesPagesReducer,
 };

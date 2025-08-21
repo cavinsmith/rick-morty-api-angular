@@ -4,9 +4,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as DimensionActions from '../actions/dimensions.actions';
 import { Dimension } from '../models/dimension.model';
 
-interface DimensionObject {  
-  [id: string]: Dimension;
-}
+type DimensionObject = Record<string, Dimension>;
 
 export interface DimensionsState {
   dimensions: DimensionObject;
@@ -15,13 +13,13 @@ export interface DimensionsState {
     id: number;
   }[];
   loading: boolean;
-  error: any;
+  error: string | null;
 }
 export const initialState: DimensionsState = {
   dimensions: {},
   allDimensionNames: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export const dimensionsReducer = createReducer(
@@ -35,25 +33,25 @@ export const dimensionsReducer = createReducer(
 
   on(DimensionActions.loadAllCharactersInDimensionSuccess, (state, { dimension, residents }) => {
     const residentsPaginated = residents.reduce((acc: string[][], value: string, i: number) => {
-            acc[Math.floor(i / 6)] = acc[Math.floor(i / 6)] || [];
-            acc[Math.floor(i / 6)].push(value);
-            return acc;
-          }, [])
+      acc[Math.floor(i / 6)] = acc[Math.floor(i / 6)] || [];
+      acc[Math.floor(i / 6)].push(value);
+      return acc;
+    }, []);
     return {
       ...state,
       dimensions: {
         ...state.dimensions,
         [dimension]: {
           name: dimension,
-          residents: residentsPaginated
+          residents: residentsPaginated,
         },
       },
       loading: false,
-      error: null,      
+      error: null,
     };
   }),
 
-  on(DimensionActions.loadAllDimensionsSuccess, (state, { dimensions }) => {    
+  on(DimensionActions.loadAllDimensionsSuccess, (state, { dimensions }) => {
     return {
       ...state,
       allDimensionNames: dimensions,
@@ -66,5 +64,5 @@ export const dimensionsReducer = createReducer(
     ...state,
     loading: false,
     error,
-  }))
+  })),
 );

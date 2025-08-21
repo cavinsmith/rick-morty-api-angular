@@ -1,4 +1,3 @@
-
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CharactersState } from '../state/app.state';
 import { Character } from '../models/character.model';
@@ -7,30 +6,32 @@ export const selectCharactersPagesState = createFeatureSelector<CharactersState>
 
 export const selectCharacters = createSelector(
   selectCharactersPagesState,
-  (state) => state.characters
+  (state) => state.characters,
 );
 
-export const selectCharacter = (id: number) => createSelector(
-  selectCharactersPagesState,
-  (state) => state.characters[id]
-);
+export const selectCharacter = (id: number) =>
+  createSelector(
+    selectCharactersPagesState,
+    (state) => state.characters[id] as Character | undefined,
+  );
 
-export const selectMultipleCharacters = (ids: number[]) => createSelector(
-  selectCharactersPagesState,
-  (state) => {
+export const selectMultipleCharacters = (ids: number[]) =>
+  createSelector(selectCharactersPagesState, (state) => {
     return ids.reduce((acc, id) => {
-      acc.push({ ...state.characters[id] });
+      const character = state.characters[id];
+      if (character) {
+        acc.push({ ...character });
+      }
       return acc;
     }, [] as Character[]);
-  }
-);
+  });
 
 export const selectCharacterLoading = createSelector(
   selectCharactersPagesState,
-  (state) => state.loading
+  (state) => state.loading,
 );
 
 export const selectCharacterError = createSelector(
   selectCharactersPagesState,
-  (state) => state.error
+  (state) => state.error,
 );

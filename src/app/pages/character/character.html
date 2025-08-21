@@ -1,3 +1,5 @@
-@if (character$ | async; as character) {
-  <app-character-card [character]="character"></app-character-card>
-}
+<app-loader [waitfor]="character$">
+  @if (character$ | async; as character) {
+    <app-character-card [character]="character"></app-character-card>
+  }
+</app-loader>
