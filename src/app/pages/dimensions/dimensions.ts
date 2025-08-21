@@ -1,18 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
-import { GenericListPagesComponent } from '../generic-list-pages/generic-list-pages.component';
 import { LocationFilter } from 'rickmortyapi';
 
 @Component({
-  selector: 'app-list-locations',
-  imports: [GenericListPagesComponent],
-  templateUrl: './list-locations.html',
-  styleUrl: './list-locations.scss'
+  selector: 'app-page-dimensions',
+  imports: [],
+  templateUrl: './dimensions.html',
+  styleUrl: './dimensions.scss'
 })
-export class ListLocations {
+export class ListDimensions {
   locationsFacade = inject(LocationsPagesFacade);
-  initialPage: number = 1;
-  filter: LocationFilter = {};
+  currentPage: number = 1;
+  filter: LocationFilter = {
+
+  };
 
   setDimension(dimension: string) {
     this.filter = {

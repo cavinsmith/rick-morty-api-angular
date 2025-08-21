@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListLocations } from './list-episodes';
+import { ListLocations } from './dimensions';
 
 describe('ListLocations', () => {
   let component: ListLocations;
