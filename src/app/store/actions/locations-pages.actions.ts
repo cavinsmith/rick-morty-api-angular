@@ -7,6 +7,11 @@ export const loadLocationsPages = createAction(
   props<{ page: number, filter: LocationFilter }>()
 );
 
+export const loadLocationsAllPages = createAction(
+  '[LocationsPages] Load Locations All Pages',
+  props<{ filter: LocationFilter }>()
+);
+
 export const loadLocationsPagesSuccess = createAction(
   '[LocationsPages] Load Locations Page Success',
   props<{ page: number; locations: Location[]; totalPages: number, totalItems: number, filter: LocationFilter }>()

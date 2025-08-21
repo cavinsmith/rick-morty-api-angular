@@ -8,6 +8,7 @@ import { Location } from './pages/location/location';
 import { Episode } from './pages/episode/episode';
 import { Search } from './pages/search/search';
 import { Dimension } from './pages/dimension/dimension';
+import { Dimensions } from './pages/dimensions/dimensions';
 
 import * as routesConstants from './constants/routes';
 
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: routesConstants.ROUTE_CHARACTERS, component: ListCharacters },
   { path: routesConstants.ROUTE_CHARACTER_ROUTER, component: Character },
   { path: routesConstants.ROUTE_DIMENSION_ROUTER, component: Dimension },
+  { path: routesConstants.ROUTE_DIMENSIONS, component: Dimensions },
 
 ];

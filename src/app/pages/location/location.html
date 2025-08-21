@@ -5,5 +5,5 @@
   Dimension: {{location.dimension}}<br>
   Residents amount: {{location.residents.length }}<br>
   </app-text>
-  <showcase-characters [characterIds]="location.residents | extractIds"></showcase-characters>
+  <showcase-characters [characterIds]="location.residents | paginate"></showcase-characters>
 }

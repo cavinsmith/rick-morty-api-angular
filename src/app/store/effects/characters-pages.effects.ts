@@ -14,7 +14,7 @@ export class CharactersPagesEffects {
   private apiService = inject(ApiService);
   private store = inject(Store);
 
-loadCharactersPage$ = createEffect(() => this.actions$.pipe(
+  loadCharactersPage$ = createEffect(() => this.actions$.pipe(
     ofType(CharactersPagesActions.loadCharactersPages),
     withLatestFrom(
       this.actions$.pipe(
@@ -43,5 +43,4 @@ loadCharactersPage$ = createEffect(() => this.actions$.pipe(
       )
     )
   );
-
 }

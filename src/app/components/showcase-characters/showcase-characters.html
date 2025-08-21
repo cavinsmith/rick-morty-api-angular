@@ -4,3 +4,11 @@
     }
 }
 
+    <mat-paginator
+        [length]="totalElements"
+        [pageSize]="6"
+        aria-label="Select page"
+        [pageIndex]="currentPage - 1"
+        (page)="onPageChange($event)">
+    </mat-paginator>
+
