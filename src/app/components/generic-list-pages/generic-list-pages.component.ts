@@ -24,7 +24,7 @@ export class GenericListPagesComponent<T, F> implements OnInit, OnChanges {
   @Input() pagesFacade!: GenericPagesFacade<T, F>;
   @Input() initialPage = 1;
   @Input() filter!: F;
-  @ContentChild('itemTemplate') itemTemplate!: TemplateRef<any>;
+  @ContentChild('itemTemplate') itemTemplate!: TemplateRef<{ $implicit: T }>;
 
   currentPage = 1;
   totalPagesAndItems$!: Observable<{ totalPages: number; totalItems: number }>;
@@ -47,13 +47,17 @@ export class GenericListPagesComponent<T, F> implements OnInit, OnChanges {
     }
   }
 
-  onPageChange(event: any) {
+  onPageChange(event: { pageIndex: number }) {
     this.currentPage = event.pageIndex + 1;
     this.updatePage();
   }
 
-  trackByFn(index: number, item: any): any {
-    return item.id || item.name || index;
+  trackByFn(index: number, item: T): unknown {
+    return (
+      (item as { id?: unknown; name?: unknown }).id ||
+      (item as { id?: unknown; name?: unknown }).name ||
+      index
+    );
   }
 
   private updatePage() {

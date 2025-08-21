@@ -14,4 +14,5 @@ export interface Character {
   location: CharacterLocation;
   image: string;
   episode: string[];
+  [key: string]: unknown;
 }

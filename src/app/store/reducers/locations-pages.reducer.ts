@@ -13,7 +13,7 @@ export interface PaginationModel<T, F> {
   totalItems: number;
   loading: boolean;
   filter: F;
-  error: any;
+  error: string | null;
 }
 
 export const PAGINATION_INITIAL_STATE = {
@@ -26,7 +26,7 @@ export const PAGINATION_INITIAL_STATE = {
   error: null,
 };
 
-export interface LocationsPagesState extends PaginationModel<Location, LocationFilter> {}
+export type LocationsPagesState = PaginationModel<Location, LocationFilter>;
 
 export const initialState: LocationsPagesState = {
   ...PAGINATION_INITIAL_STATE,

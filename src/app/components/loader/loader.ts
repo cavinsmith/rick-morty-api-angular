@@ -20,6 +20,6 @@ import { Portal } from '../portal/portal';
   `,
 })
 export class Loader {
-  @Input() waitfor!: Observable<any>;
+  @Input() waitfor!: Observable<unknown>;
   @Input() size = 300;
 }

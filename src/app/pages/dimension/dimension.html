@@ -1,7 +1,6 @@
 <app-loader [waitfor]="location$">
   @if (dimension$ | async; as dimension) {
-    <app-title>{{dimension.name}}</app-title>
-    <showcase-characters [characterIds]="dimension.residents"></showcase-characters>
+    <app-title>{{ dimension.name }}</app-title>
+    <app-showcase-characters [characterIds]="dimension.residents"></app-showcase-characters>
   }
 </app-loader>
-

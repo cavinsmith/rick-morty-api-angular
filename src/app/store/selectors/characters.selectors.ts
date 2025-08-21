@@ -10,12 +10,18 @@ export const selectCharacters = createSelector(
 );
 
 export const selectCharacter = (id: number) =>
-  createSelector(selectCharactersPagesState, (state) => state.characters[id]);
+  createSelector(
+    selectCharactersPagesState,
+    (state) => state.characters[id] as Character | undefined,
+  );
 
 export const selectMultipleCharacters = (ids: number[]) =>
   createSelector(selectCharactersPagesState, (state) => {
     return ids.reduce((acc, id) => {
-      acc.push({ ...state.characters[id] });
+      const character = state.characters[id];
+      if (character) {
+        acc.push({ ...character });
+      }
       return acc;
     }, [] as Character[]);
   });

@@ -9,7 +9,7 @@ import { CharacterCard } from '../character-card/character-card';
 import { Loader } from '../loader/loader';
 
 @Component({
-  selector: 'showcase-characters',
+  selector: 'app-showcase-characters',
   imports: [CommonModule, CharacterCard, MatPaginatorModule, Loader],
   templateUrl: './showcase-characters.html',
   styleUrl: './showcase-characters.scss',
@@ -35,7 +35,7 @@ export class ShowcaseCharacters implements OnInit, OnChanges {
     }
   }
 
-  onPageChange(event: any) {
+  onPageChange(event: { pageIndex: number }) {
     this.currentPage = event.pageIndex + 1;
     this.updateCharacters();
   }
@@ -47,7 +47,7 @@ export class ShowcaseCharacters implements OnInit, OnChanges {
     this.characters$ = this.charactersFacade.getRecords(extractedIds);
   }
 
-  trackByFn(index: number, item: any): any {
+  trackByFn(index: number, item: Character): unknown {
     return item.id || item.name || index;
   }
 }

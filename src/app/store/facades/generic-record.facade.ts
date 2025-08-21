@@ -1,17 +1,17 @@
-import { Store } from '@ngrx/store';
+import { Action, MemoizedSelector, Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 
 export abstract class GenericRecordFacade<T> {
   constructor(protected store: Store) {}
 
-  protected abstract loadAction: (params: { id: number }) => any;
-  protected abstract selectRecord: (id: number) => any;
+  protected abstract loadAction: (params: { id: number }) => Action;
+  protected abstract selectRecord: (id: number) => MemoizedSelector<object, T | undefined>;
   // how to make them optional in implementation?:
 
-  protected loadManyAction?: (params: { ids: number[] }) => any;
-  protected selectManyRecords?: (ids: number[]) => any;
+  protected loadManyAction?: (params: { ids: number[] }) => Action;
+  protected selectManyRecords?: (ids: number[]) => MemoizedSelector<object, T[]>;
 
-  getRecord(id: number): Observable<T> {
+  getRecord(id: number): Observable<T | undefined> {
     this.store
       .select(this.selectRecord(id))
       .pipe(take(1))

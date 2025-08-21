@@ -1,12 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EpisodesState } from '../reducers/episodes.reducer';
+import { Episode } from '../models/episode.model';
 
 export const selectEpisodesPagesState = createFeatureSelector<EpisodesState>('episodes');
 
 export const selectEpisodes = createSelector(selectEpisodesPagesState, (state) => state.episodes);
 
 export const selectEpisode = (id: number) =>
-  createSelector(selectEpisodesPagesState, (state) => state.episodes[id]);
+  createSelector(selectEpisodesPagesState, (state) => state.episodes[id] as Episode | undefined);
 
 export const selectEpisodeLoading = createSelector(
   selectEpisodesPagesState,

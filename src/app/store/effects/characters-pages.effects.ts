@@ -7,12 +7,20 @@ import { ApiService } from '../../services/api.service';
 import { Store } from '@ngrx/store';
 import { selectCharactersPageIsLoaded } from '../selectors/characters-pages.selectors';
 import { CharacterFilter } from 'rickmortyapi';
+import { Character } from '../models/character.model';
+import { Character as ApiCharacter } from 'rickmortyapi';
 
 @Injectable()
 export class CharactersPagesEffects {
   private actions$ = inject(Actions);
   private apiService = inject(ApiService);
   private store = inject(Store);
+
+  private convertApiCharacter(apiCharacter: ApiCharacter): Character {
+    return {
+      ...apiCharacter,
+    } as Character;
+  }
 
   loadCharactersPage$ = createEffect(() =>
     this.actions$.pipe(
@@ -32,14 +40,14 @@ export class CharactersPagesEffects {
               mergeMap((result) =>
                 from([
                   CharactersPagesActions.loadCharactersPagesSuccess({
-                    characters: result.characters,
+                    characters: result.characters.map((char) => this.convertApiCharacter(char)),
                     page: page,
                     totalPages: result.pages,
                     totalItems: result.items,
                     filter: filter as CharacterFilter,
                   }),
                   CharacterActions.loadCharactersSuccess({
-                    characters: result.characters,
+                    characters: result.characters.map((char) => this.convertApiCharacter(char)),
                   }),
                 ]),
               ),

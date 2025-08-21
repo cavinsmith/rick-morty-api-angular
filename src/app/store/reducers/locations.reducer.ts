@@ -8,7 +8,7 @@ type LocationObject = Record<number, Location>;
 export interface LocationsState {
   locations: LocationObject;
   loading: boolean;
-  error: any;
+  error: string | null;
 }
 export const initialState: LocationsState = {
   locations: {},

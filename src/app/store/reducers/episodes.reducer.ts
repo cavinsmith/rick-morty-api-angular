@@ -9,7 +9,7 @@ type EpisodeObject = Record<number, Episode>;
 export interface EpisodesState {
   episodes: EpisodeObject;
   loading: boolean;
-  error: any;
+  error: string | null;
 }
 export const initialState: EpisodesState = {
   episodes: {},

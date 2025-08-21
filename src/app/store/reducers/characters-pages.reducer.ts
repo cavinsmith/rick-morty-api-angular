@@ -5,7 +5,7 @@ import * as CharactersPagesActions from '../actions/characters-pages.actions';
 import { Character } from '../models/character.model';
 import { PAGINATION_INITIAL_STATE, PaginationModel } from './episodes-pages.reducer';
 
-export interface CharactersPagesState extends PaginationModel<Character, CharacterFilter> {}
+export type CharactersPagesState = PaginationModel<Character, CharacterFilter>;
 
 export const initialState: CharactersPagesState = {
   ...PAGINATION_INITIAL_STATE,

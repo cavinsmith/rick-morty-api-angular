@@ -13,7 +13,7 @@ export interface DimensionsState {
     id: number;
   }[];
   loading: boolean;
-  error: any;
+  error: string | null;
 }
 export const initialState: DimensionsState = {
   dimensions: {},

@@ -6,12 +6,19 @@ import { ApiService } from '../../services/api.service';
 import { Store } from '@ngrx/store';
 import { selectCharacters } from '../selectors/characters.selectors';
 import { Character } from '../models/character.model';
+import { Character as ApiCharacter } from 'rickmortyapi';
 
 @Injectable()
 export class CharactersEffects {
   private actions$ = inject(Actions);
   private apiService = inject(ApiService);
   private store = inject(Store);
+
+  private convertApiCharacter(apiCharacter: ApiCharacter): Character {
+    return {
+      ...apiCharacter,
+    } as Character;
+  }
 
   loadCharacter$ = createEffect(() =>
     this.actions$.pipe(
@@ -24,7 +31,7 @@ export class CharactersEffects {
           : from(this.apiService.getCharacter(id)).pipe(
               map((result) => {
                 return CharacterActions.loadCharacterSuccess({
-                  character: result,
+                  character: this.convertApiCharacter(result),
                 });
               }),
               catchError((error) =>
@@ -44,8 +51,9 @@ export class CharactersEffects {
         return missingIds.length
           ? from(this.apiService.getMultipleCharacters(missingIds)).pipe(
               map((result) => {
+                const characters = Array.isArray(result) ? result : [result];
                 return CharacterActions.loadCharactersSuccess({
-                  characters: Array.isArray(result) ? result : [result],
+                  characters: characters.map((char) => this.convertApiCharacter(char)),
                 });
               }),
               catchError((error) =>

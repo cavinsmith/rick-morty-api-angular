@@ -10,6 +10,7 @@ import { LocationsFacade } from '../../store/facades/locations.facade';
 import { Location } from '../../store/models/location.model';
 import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 import { DimensionsFacade } from '../../store/facades/dimensions.facade';
+import { Dimension as DimensionModel } from '../../store/models/dimension.model';
 import { Loader } from '../../components/loader/loader';
 
 @Component({
@@ -29,10 +30,10 @@ export class Dimension implements OnChanges, OnInit {
   initialPage = 1;
   itemsPerPage = 20;
 
-  location$!: Observable<Location>;
-  locations$!: Observable<any>;
-  locationsTotalPages$!: Observable<any>;
-  dimension$!: Observable<any>;
+  location$!: Observable<Location | undefined>;
+  locations$!: Observable<Location[] | undefined>;
+  locationsTotalPages$!: Observable<{ totalPages: number; totalItems: number }>;
+  dimension$!: Observable<DimensionModel | undefined>;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

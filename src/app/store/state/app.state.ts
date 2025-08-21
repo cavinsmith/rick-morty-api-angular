@@ -12,7 +12,7 @@ export type CharacterObject = Record<number, Character>;
 export interface CharactersState {
   characters: CharacterObject;
   loading: boolean;
-  error: any;
+  error: string | null;
 }
 
 export interface AppState {

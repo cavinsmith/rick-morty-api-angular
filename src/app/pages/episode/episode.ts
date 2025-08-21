@@ -25,7 +25,7 @@ export class Episode implements OnChanges, OnInit {
   @Input() currentEpisode = 55;
   @Input() id!: string;
 
-  episode$!: Observable<EpisodeModel>;
+  episode$!: Observable<EpisodeModel | undefined>;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

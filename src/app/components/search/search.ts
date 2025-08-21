@@ -9,7 +9,6 @@ import { isEqual } from 'lodash';
 import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { Loader } from '../loader/loader';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 
 @Component({
@@ -24,7 +23,7 @@ import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
-export class Search<T extends { id: number; [key: string]: any }, F> implements OnInit {
+export class Search<T extends { id: number }, F> implements OnInit {
   searchControl = new FormControl('');
   @Input() pagesFacade!: GenericPagesFacade<T[], F>;
   @Input() routeLink!: string;
@@ -62,7 +61,7 @@ export class Search<T extends { id: number; [key: string]: any }, F> implements 
         const values = entities.map((entity) => {
           return {
             id: entity.id,
-            value: (entity as any)[this.searchParameter] as string,
+            value: (entity as Record<string, unknown>)[this.searchParameter] as string,
           };
         });
 

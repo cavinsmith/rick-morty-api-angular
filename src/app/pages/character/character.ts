@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CharactersFacade } from '../../store/facades/characters.facade';
 import { Observable } from 'rxjs';
+import { Character as CharacterModel } from '../../store/models/character.model';
 
 import { CharacterCard } from '../../components/character-card/character-card';
 import { Loader } from '../../components/loader/loader';
@@ -20,7 +21,7 @@ export class Character implements OnChanges, OnInit {
   @Input() currentCharacter = 55;
   @Input() id!: string;
 
-  character$!: Observable<any>;
+  character$!: Observable<CharacterModel | undefined>;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

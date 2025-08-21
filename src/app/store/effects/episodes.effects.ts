@@ -5,7 +5,6 @@ import { catchError, mergeMap, withLatestFrom, of, from, EMPTY, map } from 'rxjs
 import { ApiService } from '../../services/api.service';
 import { Store } from '@ngrx/store';
 import { selectEpisodes } from '../selectors/episodes.selectors';
-import { Episode } from 'rickmortyapi';
 
 @Injectable()
 export class EpisodesEffects {

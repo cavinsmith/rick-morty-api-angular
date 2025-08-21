@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { LocationsFacade } from '../../store/facades/locations.facade';
 import { Observable } from 'rxjs';
+import { Location as LocationModel } from '../../store/models/location.model';
 
 import { Title } from '../../components/title/title';
 import { Text } from '../../components/text/text';
@@ -24,7 +25,7 @@ export class Location implements OnChanges, OnInit {
   @Input() currentLocation = 55;
   @Input() id!: string;
 
-  location$!: Observable<any>;
+  location$!: Observable<LocationModel | undefined>;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
