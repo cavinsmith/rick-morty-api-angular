@@ -31,8 +31,7 @@ export class GenericListPagesComponent<T, F> implements OnInit, OnChanges {
   ngOnChanges(
     changes: SimpleChanges
   ) {
-    if (!isEqual(changes['filter'].currentValue, changes['filter'].previousValue)) {
-      console.log('Filter changed:', changes['filter'].currentValue,changes['filter'].previousValue );
+    if (changes['filter'] && !isEqual(changes['filter'].currentValue, changes['filter'].previousValue)) {
       this.currentPage = 1;
       this.updatePage();
     }

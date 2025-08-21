@@ -1,1 +1,9 @@
-CHARACTERS LIST HERE
+<app-title>Characters</app-title>
+<app-generic-list [pagesFacade]="charactersFacade" [initialPage]="1">
+    <ng-template #itemTemplate let-character>
+        <app-text>
+          <app-link [link]="['/',characterRouterLink, character.id]" [text]="character.name"></app-link>
+        </app-text>
+    </ng-template>
+</app-generic-list>
+

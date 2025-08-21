@@ -1,6 +1,6 @@
-.card-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
+.title {
+  font-size: 32px;
+  font-family: 'Get Schwifty', sans-serif;
+  // font shadow no blue 4px
+  text-shadow: 4px 4px 0px var(--morty-lime)
 }
