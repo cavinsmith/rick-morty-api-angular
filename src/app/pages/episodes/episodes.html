@@ -1,8 +1,9 @@
-<button (click)="setEpisodeName('Jerry')">Jerry</button>
-
-<app-generic-list [pagesFacade]="episodesFacade" [initialPage]="initialPage" [filter]="filter">
+<app-title>Episodes</app-title>
+<app-generic-list [pagesFacade]="episodesFacade" [initialPage]="1">
     <ng-template #itemTemplate let-episode>
-        <p>Episode: {{episode.name}}</p>
+        <app-text>
+          {{episode.episode }} <app-link [link]="['/',episodeRouterLink, episode.id]" [text]="episode.name"></app-link>
+        </app-text>
     </ng-template>
 </app-generic-list>
 

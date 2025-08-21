@@ -18,10 +18,11 @@ export const selectCharacter = (id: number) => createSelector(
 export const selectMultipleCharacters = (ids: number[]) => createSelector(
   selectCharactersPagesState,
   (state) => {
+    console.log('!!!',ids)
     return ids.reduce((acc, id) => {
-      acc[id] = { ...state.characters[id] } ;
+      acc.push({ ...state.characters[id] });
       return acc;
-    }, {} as { [id: number]: Character });
+    }, [] as Character[]);
   }
 );
 

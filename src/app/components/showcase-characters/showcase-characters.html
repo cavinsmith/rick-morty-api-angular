@@ -1,0 +1,6 @@
+@if(characters$ | async; as characters) {
+    @for(character of (characters || []); track character.name) {
+        <app-character-card [character]="character"></app-character-card>
+    }
+}
+

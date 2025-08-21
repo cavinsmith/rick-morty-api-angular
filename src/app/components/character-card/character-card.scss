@@ -2,6 +2,15 @@
   max-width: 200px;
   min-width: 300px;
   overflow: hidden;
+  box-shadow: 12px 12px 0px var(--morty-coral);
+  margin: 0px 16px 16px 0px;
+}
+
+.character-header {
+  border-bottom: 4px solid var(--morty-green);
+}
+.character-card-wrapper {
+  display: inline-block;
 }
 
 .character-header-image {
@@ -14,6 +23,5 @@
   width: 100%;
   background-size: cover;
   height: 200px;
-  // shadow
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
