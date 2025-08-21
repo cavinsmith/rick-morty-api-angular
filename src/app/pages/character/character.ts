@@ -5,11 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CharactersFacade } from '../../store/facades/characters.facade';
 import { Observable } from 'rxjs';
 
-import { Title } from "../../components/title/title";
-import { Text } from "../../components/text/text";
+import { CharacterCard } from '../../components/character-card/character-card';
+
 @Component({
   selector: 'app-page-character',
-  imports: [CommonModule, Title, Text],
+  imports: [CommonModule, CharacterCard],
   templateUrl: './character.html',
   styleUrl: './character.scss',
 })

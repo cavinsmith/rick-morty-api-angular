@@ -20,7 +20,6 @@ export class ShowcaseCharacters implements OnInit {
   characters$!: Observable<(Character)[]>
 
   ngOnInit(): void {
-    console.log('ShowcaseCharacters initialized with IDs:', this.characterIds);
     this.characters$ = this.charactersFacade.getRecords(this.characterIds);
   }
 
