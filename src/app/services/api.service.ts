@@ -122,4 +122,38 @@ export class ApiService {
       locations: allLocations
     }
   }
+
+  async getAllDimensions(): Promise<{ name: string; id: number }[]> {
+    const locations = await getLocations();
+    
+    if(locations.status !== 200 || !locations.data.info) {
+      throw new Error(`Failed to fetch all dimensions with status message: ${locations.statusMessage}`);
+    }
+
+    const allDimensionNames:string[] = []
+    const results: { name: string; id: number }[] = [];
+    
+    for(const location of locations.data.results || []) {      
+      if(!allDimensionNames.includes(location.dimension)) {
+        results.push({ name: location.dimension, id: location.id });
+      }
+      allDimensionNames.push(location.dimension);
+    }
+
+    const totalPages = locations.data.info?.pages || 0;
+    for(let page = 2; page <= totalPages; page++) {      
+      const moreLocations = await getLocations({ page });
+      if(moreLocations.status === 200 && moreLocations.data) {
+        for(const location of moreLocations.data.results || []) {
+          if(!allDimensionNames.includes(location.dimension)) {
+            results.push({ name: location.dimension, id: location.id });
+          }
+          allDimensionNames.push(location.dimension);
+        }
+      } else {
+        throw new Error(`Failed to fetch dimensions with status message: ${moreLocations.statusMessage}`);
+      }
+    }
+    return results
+  }
 }

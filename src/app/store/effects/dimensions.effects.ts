@@ -34,8 +34,21 @@ export class DimensionsEffects {
           });
         }),
         catchError((error) => {
-          console.log(error)
           return of(DimensionsActions.loadAllCharactersInDimensionFailure({ error: error.message }));
+        })
+      );
+    })
+  ));
+
+  loadAllDimensionNames$ = createEffect(() => this.actions$.pipe(
+    ofType(DimensionsActions.loadAllDimensions),
+    mergeMap(() => {
+      return from(this.apiService.getAllDimensions()).pipe(
+        map((result) => {
+          return DimensionsActions.loadAllDimensionsSuccess({ dimensions: result });
+        }),
+        catchError((error) => {
+          return of(DimensionsActions.loadAllDimensionsFailure({ error: error.message }));
         })
       );
     })

@@ -22,7 +22,7 @@ export const loadAllDimensions = createAction(
 
 export const loadAllDimensionsSuccess = createAction(
   '[Characters] Load All Dimensions Success',
-  props<{ dimensions: string[] }>()
+  props<{ dimensions: { name: string; id: number }[] }>()
 );
 
 export const loadAllDimensionsFailure = createAction(

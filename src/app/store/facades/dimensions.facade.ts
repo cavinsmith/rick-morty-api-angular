@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as DimensionsActions from '../actions/dimensions.actions';
-import { selectDimension }  from '../selectors/dimensions.selectors';
+import { selectDimension, selectDimensionNames }  from '../selectors/dimensions.selectors';
 import { Dimension } from  '../models/dimension.model'
 import { Observable, take } from 'rxjs';
 
@@ -20,6 +20,17 @@ export class DimensionsFacade {
       }
     });
     return this.store.select(selectDimension(name));
+  }
+
+  getAllDimensionNames(): Observable<{name: string, id: number}[]> {
+    this.store.select(selectDimensionNames).pipe(
+      take(1),
+    ).subscribe(dimensions => {
+      if (!dimensions || dimensions.length === 0) {
+        this.store.dispatch(DimensionsActions.loadAllDimensions());
+        }
+      });
+    return this.store.select(selectDimensionNames);
   }
 
 }

@@ -23,3 +23,8 @@ export const selectDimensionError = createSelector(
   selectDimensionsState,
   (state) => state.error
 );
+
+export const selectDimensionNames = createSelector(
+  selectDimensionsState,
+  (state) => state.allDimensionNames
+);

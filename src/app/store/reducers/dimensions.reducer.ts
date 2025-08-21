@@ -11,7 +11,7 @@ interface DimensionObject {
 export interface DimensionsState {
   dimensions: DimensionObject;
   allDimensionNames: {
-    name: string[];
+    name: string;
     id: number;
   }[];
   loading: boolean;
@@ -50,6 +50,15 @@ export const dimensionsReducer = createReducer(
       },
       loading: false,
       error: null,      
+    };
+  }),
+
+  on(DimensionActions.loadAllDimensionsSuccess, (state, { dimensions }) => {    
+    return {
+      ...state,
+      allDimensionNames: dimensions,
+      loading: false,
+      error: null,
     };
   }),
 
