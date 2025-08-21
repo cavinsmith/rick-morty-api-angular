@@ -9,11 +9,11 @@ import { Title } from "../../components/title/title";
 import { Text } from "../../components/text/text";
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
 
-import { ExtractIdsPipe } from "../../pipes/extract-ids";
+import { PaginatePipe } from "../../pipes/paginate";
 
 @Component({
   selector: 'app-page-location',
-  imports: [CommonModule, Title, Text, ExtractIdsPipe, ShowcaseCharacters],
+  imports: [CommonModule, Title, Text, PaginatePipe, ShowcaseCharacters],
   templateUrl: './location.html',
   styleUrl: './location.scss',
 })

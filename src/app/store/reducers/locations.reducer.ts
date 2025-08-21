@@ -1,7 +1,6 @@
-// выглядит ок
-
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as LocationActions from '../actions/locations.actions';
+import * as DimensionActions from '../actions/dimensions.actions';
 import { Location } from '../models/location.model';
 
 interface LocationObject {
@@ -41,7 +40,7 @@ export const locationsReducer = createReducer(
   }),
 
 
-  on(LocationActions.loadLocationsSuccess, (state, { locations }) => {
+  on(LocationActions.loadLocationsSuccess, DimensionActions.loadAllCharactersInDimensionSuccess,(state, { locations }) => {
     return {
       ...state,
       locations: {
@@ -56,6 +55,7 @@ export const locationsReducer = createReducer(
     };
   }),
 
+ 
   on(LocationActions.loadLocationFailure, (state, { error }) => ({
     ...state,
     loading: false,

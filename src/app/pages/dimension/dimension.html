@@ -1,20 +1,5 @@
-<!-- @if (locations$ | async; as location) {
-  {{ locations$ | async | json }}
-}
-  -->
-@if (location$ | async; as location) {
-  <app-title>{{location.dimension}}</app-title>
-
-  @if (locations$ | async; as locations) {
-    @for(locations of locations; track locations.name) {
-      <showcase-characters [characterIds]="locations.residents | extractIds"></showcase-characters>
-    }
-  }
-  @if(locationsTotalPages$ | async; as totalPages) {
-    @if(totalPages.totalPages > 1) {
-      <button (click)="previousPage()" [disabled]="initialPage === 1">Previous page</button>
-      <button (click)="nextPage()" [disabled]="initialPage === totalPages.totalPages">Next page</button>
-    }
-  }
+@if (dimension$ | async; as dimension) {
+  <app-title>{{dimension.name}}</app-title>
+  <showcase-characters [characterIds]="dimension.residents"></showcase-characters>
 }
 

@@ -6,5 +6,5 @@
   Air Date: {{episode.air_date}}<br>
   Characters partake: {{episode.characters.length }}<br>
   </app-text>
-  <showcase-characters [characterIds]="episode.characters | extractIds"></showcase-characters>
+  <showcase-characters [characterIds]="episode.characters | paginate"></showcase-characters>
 }

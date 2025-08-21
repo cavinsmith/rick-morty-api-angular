@@ -38,16 +38,6 @@ export class GenericListPagesComponent<T, F> implements OnInit, OnChanges {
     }
   }
 
-  onPreviousPage() {
-    this.currentPage--;
-    this.updatePage();
-  }
-
-  onNextPage() {
-    this.currentPage++;
-    this.updatePage();
-  }
-
   onPageChange(event: any) {
     this.currentPage = event.pageIndex + 1;
     this.updatePage();

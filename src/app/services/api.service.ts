@@ -91,4 +91,35 @@ export class ApiService {
       throw new Error(`Failed to fetch episodes with status message: ${episodes.statusMessage}`);
     }
   }
+
+  async getCharactersInDimension(dimension: string): Promise<{ residents: string[], locations: Location[] }> {
+    console.log(`Fetching characters in dimension: ${dimension}`);
+    const locations = await getLocations({ dimension });
+    if(locations.status !== 200 || !locations.data.info) {
+      throw new Error(`Failed to fetch characters in dimension ${dimension} with status message: ${locations.statusMessage}`);
+    } 
+
+    const allResidents: string[] = []
+    const allLocations: Location[] = [...locations.data.results || []];
+    for(const location of locations.data.results || []) {
+      allResidents.push(...location.residents);
+    }
+
+    const totalPages = locations.data.info?.pages || 0;
+    for(let page = 2; page <= totalPages; page++) {      
+      const moreLocations = await getLocations({ dimension, page });
+      if(moreLocations.status === 200 && moreLocations.data) {
+        allLocations.push(...moreLocations.data.results || []);
+        for(const location of moreLocations.data.results || []) {
+          allResidents.push(...location.residents);
+        }
+      } else {
+        throw new Error(`Failed to fetch characters in dimension ${dimension} with status message: ${moreLocations.statusMessage}`);
+      }
+    }
+    return {
+      residents: allResidents,
+      locations: allLocations
+    }
+  }
 }

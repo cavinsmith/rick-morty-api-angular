@@ -9,12 +9,12 @@ import { Title } from "../../components/title/title";
 import { Text } from "../../components/text/text";
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
 
-import { ExtractIdsPipe } from "../../pipes/extract-ids";
 import { Episode as EpisodeModel } from '../../store/models/episode.model';
+import { PaginatePipe } from '../../pipes/paginate';
 
 @Component({
   selector: 'app-page-episode',
-  imports: [CommonModule, Title, Text, ExtractIdsPipe, ShowcaseCharacters],
+  imports: [CommonModule, Title, Text, ShowcaseCharacters, PaginatePipe],
   templateUrl: './episode.html',
   styleUrl: './episode.scss',
 })

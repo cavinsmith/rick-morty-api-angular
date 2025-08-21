@@ -5,6 +5,7 @@ import { LocationsPagesState } from "../reducers/locations-pages.reducer";
 import { EpisodesPagesState } from "../reducers/episodes-pages.reducer";
 import { EpisodesState } from "../reducers/episodes.reducer";
 import { CharactersPagesState } from "../reducers/characters-pages.reducer";
+import { DimensionsState } from "../reducers/dimensions.reducer";
 
 export interface CharacterObject {
   [id: number]: Character;
@@ -23,4 +24,5 @@ export interface AppState {
   locationsPages: LocationsPagesState;
   episodes: EpisodesState;
   episodesPages: EpisodesPagesState;
+  dimensions: DimensionsState;
 }
