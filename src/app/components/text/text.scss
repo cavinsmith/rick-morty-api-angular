@@ -1,0 +1,8 @@
+.text {
+  font-size: 20px;
+  color: var(--rick-black);
+  text-shadow: 0px 0px 1px var(--morty-lime);
+  // left line
+  border-left: 4px solid var(--morty-lime);
+  padding-left: 16px;
+}

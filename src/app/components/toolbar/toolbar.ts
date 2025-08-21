@@ -18,10 +18,9 @@ interface RouteLink {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Toolbar {
-  //routes = routeConstants;
   links: RouteLink[] = [
     { path: routeConstants.ROUTE_SEARCH, label: 'Search' },
-    { path: routeConstants.ROUTE_CHARACTERS, label: 'Dimensions' },
+    { path: routeConstants.ROUTE_DIMENSIONS, label: 'Dimensions' },
     { path: routeConstants.ROUTE_LOCATIONS, label: 'Locations' },
     { path: routeConstants.ROUTE_EPISODES, label: 'Episodes' },
     { path: routeConstants.ROUTE_CHARACTERS, label: 'Characters' }

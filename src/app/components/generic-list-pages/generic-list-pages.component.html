@@ -11,12 +11,6 @@
 }
 
 @if (totalPagesAndItems$ | async; as totalPagesAndItems) {
-    <div class="pagination-controls">
-        Page {{ currentPage }} / {{ totalPagesAndItems.totalPages }}<br/>
-        <button (click)="onPreviousPage()" [disabled]="currentPage <= 1">Previous</button>
-        <button (click)="onNextPage()" [disabled]="currentPage >= totalPagesAndItems.totalPages">Next</button>
-    </div>
-
     <mat-paginator
         [length]="totalPagesAndItems.totalItems"
         [pageSize]="20"
