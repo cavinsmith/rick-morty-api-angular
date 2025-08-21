@@ -7,6 +7,7 @@ import { Character } from './pages/character/character';
 import { Location } from './pages/location/location';
 import { Episode } from './pages/episode/episode';
 import { Search } from './pages/search/search';
+import { Dimension } from './pages/dimension/dimension';
 
 import * as routesConstants from './constants/routes';
 
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: routesConstants.ROUTE_EPISODES, component: ListEpisodes },
   { path: routesConstants.ROUTE_CHARACTERS, component: ListCharacters },
   { path: routesConstants.ROUTE_CHARACTER_ROUTER, component: Character },
-  
+  { path: routesConstants.ROUTE_DIMENSION_ROUTER, component: Dimension },
+
 ];

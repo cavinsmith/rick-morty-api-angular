@@ -23,3 +23,8 @@ export const selectLocationError = createSelector(
   selectLocationsPagesState,
   (state) => state.error
 );
+
+export const selectDimensionFromLocation = (id: number) => createSelector(
+  selectLocationsPagesState,
+  (state) => state.locations[id]?.dimension as string
+);
