@@ -11,8 +11,20 @@
             <p>
                 Status: {{character.status}}<br>
                 Gender: {{character.gender}}<br>
-                Origin:  <app-link [link]="['/', locationRouterLink, character.origin.url | extractId]" [text]="character.origin.name"></app-link><br>
-                Location: <app-link [link]="['/', locationRouterLink, character.location.url | extractId]" [text]="character.location.name"></app-link>
+                @if(character.origin) {
+                    Origin:
+                    @if( character.origin.url === "") {
+                        <span>{{character.origin.name}}</span><br>
+                    } @else {
+                        <app-link [link]="['/', locationRouterLink, character.origin.url | extractId]" [text]="character.origin.name"></app-link><br>
+                    }
+                    Location:
+                    @if(character.location.url === "") {
+                        <span>{{character.location.name}}</span><br>
+                    } @else {
+                        <app-link [link]="['/', locationRouterLink, character.location.url | extractId]" [text]="character.location.name"></app-link>
+                    }
+                }
             </p>
         </mat-card-content>
         </mat-card>

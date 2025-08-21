@@ -9,7 +9,7 @@ import { isEqual } from 'lodash';
 import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
-
+import * as routesConstants from '../../constants/routes';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 
 @Component({
@@ -28,6 +28,7 @@ import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 export class Search<T extends { id: number; [key: string]: any }, F> implements OnInit {
   searchControl = new FormControl('');
   @Input() pagesFacade!: GenericPagesFacade<T[], F>;
+  @Input() routeLink!: string;
   searchFilter: F = {} as F;
   // Parameter input value of search field e.g. "dimension" or "name"
   @Input() searchParameter: string = 'name';
@@ -87,10 +88,7 @@ export class Search<T extends { id: number; [key: string]: any }, F> implements 
 
   // onselect event for mat-option
   public onSelect(option: { id: number; value: string }) {
-    console.log(`Selected option: ${option.value}`);
-    // User router to go to selected location
-    // TODO: send it to parent
-    this.router.navigate(['/location', option.id]);
+    this.router.navigate(['/', this.routeLink, option.id]);
   }
 
 }

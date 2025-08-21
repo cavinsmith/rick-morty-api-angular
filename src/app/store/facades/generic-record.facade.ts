@@ -11,13 +11,11 @@ export abstract class GenericRecordFacade<T> {
   protected loadManyAction?: (params: { ids: number[] }) => any;
   protected selectManyRecords?: (ids: number[]) => any;
 
-  getRecord(id: number): Observable<T | undefined> {
+  getRecord(id: number): Observable<T> {
     this.store.select(this.selectRecord(id)).pipe(
       take(1)
     ).subscribe(item => {
-      console.log('Checking for character with ID:', id);
       if (!item) {
-        console.log('Character not found, dispatching load action.');
         this.store.dispatch(this.loadAction({ id }));
       }
     });

@@ -1,13 +1,3 @@
 @if (character$ | async; as character) {
-  <app-title>{{character.name}}</app-title>
-  <img [src]="character.image" alt="Photo of {{character.name}}">
-
-  <app-text>
-  Status: {{character.status}}<br>
-  Species: {{character.species}}<br>
-  Type: {{character.type}}<br>
-  Gender: {{character.gender}}<br>
-  Origin: {{character.origin.name}}<br>
-  Location: {{character.location.name}}
-  </app-text>
+  <app-character-card [character]="character"></app-character-card>
 }

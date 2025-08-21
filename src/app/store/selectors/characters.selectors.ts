@@ -18,7 +18,6 @@ export const selectCharacter = (id: number) => createSelector(
 export const selectMultipleCharacters = (ids: number[]) => createSelector(
   selectCharactersPagesState,
   (state) => {
-    console.log('!!!',ids)
     return ids.reduce((acc, id) => {
       acc.push({ ...state.characters[id] });
       return acc;

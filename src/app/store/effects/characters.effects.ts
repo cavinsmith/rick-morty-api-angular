@@ -36,7 +36,6 @@ export class CharactersEffects {
       const missingIds = ids.filter(id => !characters[id]);
       return missingIds.length ? from(this.apiService.getMultipleCharacters(missingIds)).pipe(
         map((result) => {
-          console.log(missingIds, result)
           return CharacterActions.loadCharactersSuccess({
             characters: Array.isArray(result) ? result : [result]
           });

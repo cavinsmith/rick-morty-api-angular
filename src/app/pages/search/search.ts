@@ -4,6 +4,7 @@ import { Search as SearchComponent } from '../../components/search/search';
 import { CharactersPagesFacade } from '../../store/facades/characters-pages.facade';
 import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 import { EpisodesPagesFacade } from '../../store/facades/episodes-pages.facade';
+import * as  routesConstants from '../../constants/routes';
 
 @Component({
   selector: 'app-page-search',
@@ -16,5 +17,6 @@ export class Search {
   charactersPagesFacade = inject(CharactersPagesFacade);
   locationsPagesFacade = inject(LocationsPagesFacade);
   episodesPagesFacade = inject(EpisodesPagesFacade);
+  routesLinks = routesConstants
 
 }
