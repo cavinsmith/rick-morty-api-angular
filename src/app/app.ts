@@ -6,6 +6,6 @@ import { Toolbar } from './components/toolbar/toolbar';
   selector: 'app-root',
   imports: [RouterOutlet, Toolbar],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {}

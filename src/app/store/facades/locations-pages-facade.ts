@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { GenericPagesFacade } from './generic-pages.facade';
 import { Store } from '@ngrx/store';
-import * as LocationsPagesActions from '../actions/locations-pages.actions';
-import { selectLocationsPage, selectLocationsTotalPagesAndItems, selectLocationsPageIsLoaded }  from '../selectors/locations-pages.selectors';
-import { Location } from  '../models/location.model'
 import { LocationFilter } from 'rickmortyapi';
+import * as LocationsPagesActions from '../actions/locations-pages.actions';
+import { Location } from '../models/location.model';
+import {
+  selectLocationsPage,
+  selectLocationsPageIsLoaded,
+  selectLocationsTotalPagesAndItems,
+} from '../selectors/locations-pages.selectors';
+import { GenericPagesFacade } from './generic-pages.facade';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationsPagesFacade extends GenericPagesFacade<Location[], LocationFilter> {
   protected loadAction = LocationsPagesActions.loadLocationsPages;
@@ -15,6 +19,7 @@ export class LocationsPagesFacade extends GenericPagesFacade<Location[], Locatio
   protected selectTotalPagesAndItems = selectLocationsTotalPagesAndItems;
   protected selectPageIsLoaded = selectLocationsPageIsLoaded;
 
+  // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(store: Store) {
     super(store);
   }

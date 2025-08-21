@@ -4,19 +4,17 @@ import { createReducer, on } from '@ngrx/store';
 import * as EpisodeActions from '../actions/episodes.actions';
 import { Episode } from '../models/episode.model';
 
-interface EpisodeObject {
-  [id: number]: Episode;
-}
+type EpisodeObject = Record<number, Episode>;
 
 export interface EpisodesState {
   episodes: EpisodeObject;
   loading: boolean;
   error: any;
 }
-export const initialState:  EpisodesState = {
+export const initialState: EpisodesState = {
   episodes: {},
   loading: false,
-  error: null
+  error: null,
 };
 
 export const episodesReducer = createReducer(
@@ -36,10 +34,9 @@ export const episodesReducer = createReducer(
         [episode.id]: episode,
       },
       loading: false,
-      error: null,      
+      error: null,
     };
   }),
-
 
   on(EpisodeActions.loadEpisodesSuccess, (state, { episodes }) => {
     return {
@@ -49,7 +46,7 @@ export const episodesReducer = createReducer(
         ...episodes.reduce((acc: EpisodeObject, item: Episode) => {
           acc[item.id] = item;
           return acc;
-        }, {}), 
+        }, {}),
       },
       loading: false,
       error: null,
@@ -60,5 +57,5 @@ export const episodesReducer = createReducer(
     ...state,
     loading: false,
     error,
-  }))
+  })),
 );

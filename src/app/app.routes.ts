@@ -24,5 +24,4 @@ export const routes: Routes = [
   { path: routesConstants.ROUTE_DIMENSION_ROUTER, component: Dimension },
   { path: routesConstants.ROUTE_DIMENSIONS, component: Dimensions },
   { path: '', component: Home },
-
 ];

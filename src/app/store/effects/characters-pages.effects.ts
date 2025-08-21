@@ -14,33 +14,44 @@ export class CharactersPagesEffects {
   private apiService = inject(ApiService);
   private store = inject(Store);
 
-  loadCharactersPage$ = createEffect(() => this.actions$.pipe(
-    ofType(CharactersPagesActions.loadCharactersPages),
-    withLatestFrom(
-      this.actions$.pipe(
-        ofType(CharactersPagesActions.loadCharactersPages),
-        switchMap(action => this.store.select(selectCharactersPageIsLoaded(action.page, action.filter)))
-      )
+  loadCharactersPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CharactersPagesActions.loadCharactersPages),
+      withLatestFrom(
+        this.actions$.pipe(
+          ofType(CharactersPagesActions.loadCharactersPages),
+          switchMap((action) =>
+            this.store.select(selectCharactersPageIsLoaded(action.page, action.filter)),
+          ),
+        ),
+      ),
+      mergeMap(([{ page, filter }, pageIsLoaded]) =>
+        pageIsLoaded
+          ? EMPTY
+          : from(this.apiService.getCharacters(page, filter)).pipe(
+              mergeMap((result) =>
+                from([
+                  CharactersPagesActions.loadCharactersPagesSuccess({
+                    characters: result.characters,
+                    page: page,
+                    totalPages: result.pages,
+                    totalItems: result.items,
+                    filter: filter as CharacterFilter,
+                  }),
+                  CharacterActions.loadCharactersSuccess({
+                    characters: result.characters,
+                  }),
+                ]),
+              ),
+              catchError((error) =>
+                of(
+                  CharactersPagesActions.loadCharactersPageFailure({
+                    error: error.message,
+                  }),
+                ),
+              ),
+            ),
+      ),
     ),
-    mergeMap(([{ page, filter }, pageIsLoaded]) => pageIsLoaded ? EMPTY : 
-        from(this.apiService.getCharacters(page, filter)).pipe(
-          mergeMap((result) => from([
-            CharactersPagesActions.loadCharactersPagesSuccess({
-              characters: result.characters,
-              page: page,
-              totalPages: result.pages,
-              totalItems: result.items,
-              filter: filter as CharacterFilter
-            }),
-            CharacterActions.loadCharactersSuccess({ 
-              characters: result.characters 
-            })
-          ])),
-          catchError((error) => of(CharactersPagesActions.loadCharactersPageFailure({ 
-            error: error.message 
-          })))
-        )
-      )
-    )
   );
 }

@@ -14,36 +14,44 @@ export class LocationsPagesEffects {
   private apiService = inject(ApiService);
   private store = inject(Store);
 
-loadLocationsPage$ = createEffect(() => this.actions$.pipe(
-    ofType(LocationsPagesActions.loadLocationsPages),
-    withLatestFrom(
-      this.actions$.pipe(
-        ofType(LocationsPagesActions.loadLocationsPages),
-        switchMap(action => this.store.select(selectLocationsPageIsLoaded(action.page, action.filter)))
-      )
+  loadLocationsPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LocationsPagesActions.loadLocationsPages),
+      withLatestFrom(
+        this.actions$.pipe(
+          ofType(LocationsPagesActions.loadLocationsPages),
+          switchMap((action) =>
+            this.store.select(selectLocationsPageIsLoaded(action.page, action.filter)),
+          ),
+        ),
+      ),
+      mergeMap(([{ page, filter }, pageIsLoaded]) =>
+        pageIsLoaded
+          ? EMPTY
+          : from(this.apiService.getLocations(page, filter)).pipe(
+              mergeMap((result) =>
+                from([
+                  LocationsPagesActions.loadLocationsPagesSuccess({
+                    locations: result.locations,
+                    page: page,
+                    totalPages: result.pages,
+                    totalItems: result.items,
+                    filter: filter as LocationFilter,
+                  }),
+                  LocationActions.loadLocationsSuccess({
+                    locations: result.locations,
+                  }),
+                ]),
+              ),
+              catchError((error) =>
+                of(
+                  LocationsPagesActions.loadLocationsPageFailure({
+                    error: error.message,
+                  }),
+                ),
+              ),
+            ),
+      ),
     ),
-    mergeMap(([{ page, filter }, pageIsLoaded]) => pageIsLoaded ? EMPTY : 
-        from(this.apiService.getLocations(page, filter)).pipe(
-          mergeMap((result) => from([
-            LocationsPagesActions.loadLocationsPagesSuccess({
-              locations: result.locations,
-              page: page,
-              totalPages: result.pages,
-              totalItems: result.items,
-              filter: filter as LocationFilter
-            }),
-            LocationActions.loadLocationsSuccess({ 
-              locations: result.locations 
-            })
-          ])),
-          catchError((error) => of(LocationsPagesActions.loadLocationsPageFailure({ 
-            error: error.message 
-          })))
-        )
-      )
-    )
   );
-
-  
-
 }

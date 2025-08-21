@@ -3,19 +3,17 @@ import * as LocationActions from '../actions/locations.actions';
 import * as DimensionActions from '../actions/dimensions.actions';
 import { Location } from '../models/location.model';
 
-interface LocationObject {
-  [id: number]: Location;
-}
+type LocationObject = Record<number, Location>;
 
 export interface LocationsState {
   locations: LocationObject;
   loading: boolean;
   error: any;
 }
-export const initialState:  LocationsState = {
+export const initialState: LocationsState = {
   locations: {},
   loading: false,
-  error: null
+  error: null,
 };
 
 export const locationsReducer = createReducer(
@@ -35,30 +33,32 @@ export const locationsReducer = createReducer(
         [location.id]: location,
       },
       loading: false,
-      error: null,      
-    };
-  }),
-
-
-  on(LocationActions.loadLocationsSuccess, DimensionActions.loadAllCharactersInDimensionSuccess,(state, { locations }) => {
-    return {
-      ...state,
-      locations: {
-        ...state.locations,
-        ...locations.reduce((acc: LocationObject, item: Location) => {
-          acc[item.id] = item;
-          return acc;
-        }, {}), 
-      },
-      loading: false,
       error: null,
     };
   }),
 
- 
+  on(
+    LocationActions.loadLocationsSuccess,
+    DimensionActions.loadAllCharactersInDimensionSuccess,
+    (state, { locations }) => {
+      return {
+        ...state,
+        locations: {
+          ...state.locations,
+          ...locations.reduce((acc: LocationObject, item: Location) => {
+            acc[item.id] = item;
+            return acc;
+          }, {}),
+        },
+        loading: false,
+        error: null,
+      };
+    },
+  ),
+
   on(LocationActions.loadLocationFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
-  }))
+  })),
 );

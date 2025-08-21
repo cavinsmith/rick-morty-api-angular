@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { GenericPagesFacade } from './generic-pages.facade';
 import { Store } from '@ngrx/store';
 import { CharacterFilter } from 'rickmortyapi';
+import { GenericPagesFacade } from './generic-pages.facade';
 
 import * as CharactersPagesActions from '../actions/characters-pages.actions';
-import { selectCharactersPage, selectCharactersTotalPagesAndItems, selectCharactersPageIsLoaded }  from '../selectors/characters-pages.selectors';
-import { Character } from  '../models/character.model'
-
+import { Character } from '../models/character.model';
+import {
+  selectCharactersPage,
+  selectCharactersPageIsLoaded,
+  selectCharactersTotalPagesAndItems,
+} from '../selectors/characters-pages.selectors';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CharactersPagesFacade extends GenericPagesFacade<Character[], CharacterFilter> {
   protected loadAction = CharactersPagesActions.loadCharactersPages;
@@ -17,6 +20,7 @@ export class CharactersPagesFacade extends GenericPagesFacade<Character[], Chara
   protected selectTotalPagesAndItems = selectCharactersTotalPagesAndItems;
   protected selectPageIsLoaded = selectCharactersPageIsLoaded;
 
+  // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(store: Store) {
     super(store);
   }

@@ -17,9 +17,9 @@ import { Portal } from '../portal/portal';
     } @else {
       <app-portal></app-portal>
     }
-  `
+  `,
 })
 export class Loader {
   @Input() waitfor!: Observable<any>;
-  @Input() size: number = 300
+  @Input() size = 300;
 }

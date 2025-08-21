@@ -6,8 +6,6 @@ import { Text } from '../../components/text/text';
   selector: 'app-page-search',
   imports: [Title, Text],
   templateUrl: './home.html',
-  styleUrl: './home.scss'
+  styleUrl: './home.scss',
 })
-
-export class Home {
-}
+export class Home {}

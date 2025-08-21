@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
   selector: 'app-portal',
   standalone: true,
   templateUrl: './portal.html',
-  styleUrls: ['./portal.scss']
+  styleUrls: ['./portal.scss'],
 })
 export class Portal {
-  @Input() size: number = 300;  
+  @Input() size = 300;
 }

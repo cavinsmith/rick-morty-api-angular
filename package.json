@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint --fix",
+    "pretty-quick": "pretty-quick --staged",
+    "prepare": "husky install"
   },
   "prettier": {
     "printWidth": 100,
@@ -47,12 +50,20 @@
     "@ngrx/schematics": "^20.0.0",
     "@types/jasmine": "~5.1.0",
     "@types/lodash": "^4.17.20",
+    "angular-eslint": "20.1.1",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.8.2"
+    "prettier": "^3.6.2",
+    "pretty-quick": "^4.2.2",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "8.34.1",
+    "husky": "^8.0.0"
   }
 }

@@ -12,23 +12,23 @@ import * as routeConstants from '../../constants/routes';
   selector: 'app-page-locations',
   imports: [GenericListPagesComponent, Title, Text, Link],
   templateUrl: './locations.html',
-  styleUrl: './locations.scss'
+  styleUrl: './locations.scss',
 })
 export class ListLocations {
   locationRouterLink = routeConstants.ROUTE_LOCATION;
   locationsFacade = inject(LocationsPagesFacade);
-  initialPage: number = 1;
+  initialPage = 1;
   filter: LocationFilter = {};
 
   setDimension(dimension: string) {
     this.filter = {
-      dimension
-    }
+      dimension,
+    };
   }
 
   setLocationName(name: string) {
     this.filter = {
-      name
-    }
+      name,
+    };
   }
 }

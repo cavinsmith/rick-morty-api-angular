@@ -4,19 +4,17 @@ import { Search as SearchComponent } from '../../components/search/search';
 import { CharactersPagesFacade } from '../../store/facades/characters-pages.facade';
 import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 import { EpisodesPagesFacade } from '../../store/facades/episodes-pages.facade';
-import * as  routesConstants from '../../constants/routes';
+import * as routesConstants from '../../constants/routes';
 
 @Component({
   selector: 'app-page-search',
   imports: [Title, SearchComponent],
   templateUrl: './search.html',
-  styleUrl: './search.scss'
+  styleUrl: './search.scss',
 })
-
 export class Search {
   charactersPagesFacade = inject(CharactersPagesFacade);
   locationsPagesFacade = inject(LocationsPagesFacade);
   episodesPagesFacade = inject(EpisodesPagesFacade);
-  routesLinks = routesConstants
-
+  routesLinks = routesConstants;
 }

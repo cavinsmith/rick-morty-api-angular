@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-text',
   standalone: true,
   templateUrl: './text.html',
-  styleUrls: ['./text.scss']
+  styleUrls: ['./text.scss'],
 })
 export class Text {}

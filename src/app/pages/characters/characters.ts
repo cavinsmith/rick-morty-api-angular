@@ -10,7 +10,7 @@ import * as routeConstants from '../../constants/routes';
   selector: 'app-page-characters',
   imports: [GenericListPagesComponent, Title, Text, Link],
   templateUrl: './characters.html',
-  styleUrl: './characters.scss'
+  styleUrl: './characters.scss',
 })
 export class ListCharacters {
   characterRouterLink = routeConstants.ROUTE_CHARACTER;

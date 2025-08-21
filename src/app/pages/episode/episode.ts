@@ -1,18 +1,16 @@
-
 import { Component, inject, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { EpisodesFacade } from '../../store/facades/episodes.facade';
 import { Observable } from 'rxjs';
 
-import { Title } from "../../components/title/title";
-import { Text } from "../../components/text/text";
+import { Title } from '../../components/title/title';
+import { Text } from '../../components/text/text';
 import { Loader } from '../../components/loader/loader';
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
 
 import { Episode as EpisodeModel } from '../../store/models/episode.model';
 import { PaginatePipe } from '../../pipes/paginate';
-
 
 @Component({
   selector: 'app-page-episode',
@@ -24,13 +22,13 @@ export class Episode implements OnChanges, OnInit {
   episodesFacade = inject(EpisodesFacade);
   route = inject(ActivatedRoute);
 
-  @Input() currentEpisode: number = 55;
+  @Input() currentEpisode = 55;
   @Input() id!: string;
 
   episode$!: Observable<EpisodeModel>;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       if (params['id']) {
         this.currentEpisode = +params['id'];
         this.updateEpisode();

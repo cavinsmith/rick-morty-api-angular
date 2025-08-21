@@ -1,14 +1,14 @@
 // выглядит ок
 
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import { isEqual } from 'lodash';
+import { LocationFilter } from 'rickmortyapi';
 import * as LocationsPagesActions from '../actions/locations-pages.actions';
 import { Location } from '../models/location.model';
-import { LocationFilter } from 'rickmortyapi';
-import { isEqual } from 'lodash';
 
 export interface PaginationModel<T, F> {
   loadedPages: Set<number>;
-  pages: { [key: number]: T[] };
+  pages: Record<number, T[]>;
   totalPages: number;
   totalItems: number;
   loading: boolean;
@@ -24,12 +24,12 @@ export const PAGINATION_INITIAL_STATE = {
   loading: false,
   filter: {},
   error: null,
-}
+};
 
 export interface LocationsPagesState extends PaginationModel<Location, LocationFilter> {}
 
 export const initialState: LocationsPagesState = {
-  ...PAGINATION_INITIAL_STATE 
+  ...PAGINATION_INITIAL_STATE,
 };
 
 export const locationsPagesReducer = createReducer(
@@ -41,29 +41,32 @@ export const locationsPagesReducer = createReducer(
     error: null,
   })),
 
-  on(LocationsPagesActions.loadLocationsPagesSuccess, (state, { page, locations, totalPages, totalItems, filter }) => {
-    const currentState = isEqual(state.filter, filter) ? state : initialState;
-    const newLoadedPages = new Set(currentState.loadedPages);
-    newLoadedPages.add(page);
+  on(
+    LocationsPagesActions.loadLocationsPagesSuccess,
+    (state, { page, locations, totalPages, totalItems, filter }) => {
+      const currentState = isEqual(state.filter, filter) ? state : initialState;
+      const newLoadedPages = new Set(currentState.loadedPages);
+      newLoadedPages.add(page);
 
-    return {
-      ...currentState,
-      loading: false,
-      error: null,
-      loadedPages: newLoadedPages,
-      totalPages,
-      totalItems,
-      filter,
-      pages: {
-        ...currentState.pages,
-        [page]: locations,
-      },
-    };
-  }),
+      return {
+        ...currentState,
+        loading: false,
+        error: null,
+        loadedPages: newLoadedPages,
+        totalPages,
+        totalItems,
+        filter,
+        pages: {
+          ...currentState.pages,
+          [page]: locations,
+        },
+      };
+    },
+  ),
 
   on(LocationsPagesActions.loadLocationsPageFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
-  }))
+  })),
 );
