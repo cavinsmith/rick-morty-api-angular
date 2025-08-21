@@ -9,7 +9,7 @@ import { isEqual } from 'lodash';
 import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
-import * as routesConstants from '../../constants/routes';
+import { Loader } from '../loader/loader';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 
 @Component({
@@ -19,7 +19,7 @@ import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ],
   templateUrl: './search.html',
   styleUrl: './search.scss'

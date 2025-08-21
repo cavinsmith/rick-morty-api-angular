@@ -7,14 +7,16 @@ import { Observable } from 'rxjs';
 
 import { Title } from "../../components/title/title";
 import { Text } from "../../components/text/text";
+import { Loader } from '../../components/loader/loader';
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
 
 import { Episode as EpisodeModel } from '../../store/models/episode.model';
 import { PaginatePipe } from '../../pipes/paginate';
 
+
 @Component({
   selector: 'app-page-episode',
-  imports: [CommonModule, Title, Text, ShowcaseCharacters, PaginatePipe],
+  imports: [CommonModule, Title, Text, ShowcaseCharacters, PaginatePipe, Loader],
   templateUrl: './episode.html',
   styleUrl: './episode.scss',
 })

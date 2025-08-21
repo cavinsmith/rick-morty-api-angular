@@ -6,10 +6,11 @@ import { CharactersFacade } from '../../store/facades/characters.facade';
 import { Observable } from 'rxjs';
 
 import { CharacterCard } from '../../components/character-card/character-card';
+import { Loader } from "../../components/loader/loader";
 
 @Component({
   selector: 'app-page-character',
-  imports: [CommonModule, CharacterCard],
+  imports: [CommonModule, CharacterCard, Loader],
   templateUrl: './character.html',
   styleUrl: './character.scss',
 })

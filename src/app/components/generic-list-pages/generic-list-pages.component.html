@@ -1,14 +1,13 @@
-@if (items$ | async; as items) {
-
-    @for (item of (items ?? []); track item.name) {
-        <ng-container 
-            *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
-        </ng-container>
+<app-loader [waitfor]="items$">
+    @if (items$ | async; as items) {
+        @for (item of (items ?? []); track trackByFn($index, item)) {
+            <ng-container 
+                *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+            </ng-container>
+        }
     }
-    
-} @else {
-    <app-portal></app-portal>   
-}
+</app-loader>   
+
 
 @if (totalPagesAndItems$ | async; as totalPagesAndItems) {
     <mat-paginator

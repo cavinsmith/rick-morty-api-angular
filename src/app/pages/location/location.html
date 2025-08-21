@@ -1,9 +1,11 @@
-@if (location$ | async; as location) {
-  <app-title>{{location.name}}</app-title>
-  <app-text>
-  Type: {{location.type}}<br>
-  Dimension: {{location.dimension}}<br>
-  Residents amount: {{location.residents.length }}<br>
-  </app-text>
-  <showcase-characters [characterIds]="location.residents | paginate"></showcase-characters>
-}
+<app-loader [waitfor]="location$">
+  @if (location$ | async; as location) {
+    <app-title>{{location.name}}</app-title>
+    <app-text>
+      Type: {{location.type}}<br>
+      Dimension: {{location.dimension}}<br>
+      Residents amount: {{location.residents.length }}<br>
+    </app-text>
+    <showcase-characters [characterIds]="location.residents | paginate"></showcase-characters>
+  }
+</app-loader>

@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 import { Observable } from 'rxjs';
 import { isEqual } from 'lodash';
-import { Portal } from "../portal/portal";
+import { Loader } from '../loader/loader';
 
 @Component({
   selector: 'app-generic-list',
-  imports: [CommonModule, MatPaginatorModule, Portal],
+  imports: [CommonModule, MatPaginatorModule, Loader],
   templateUrl: './generic-list-pages.component.html',
   styleUrl: './generic-list-pages.component.scss'
 })
@@ -44,7 +44,7 @@ export class GenericListPagesComponent<T, F> implements OnInit, OnChanges {
   }
 
   trackByFn(index: number, item: any): any {
-    return item.id || index;
+    return item.id || item.name || index;
   }
 
   private updatePage() {

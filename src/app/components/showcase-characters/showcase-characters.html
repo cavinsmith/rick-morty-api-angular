@@ -1,9 +1,9 @@
-@if(characters$ | async; as characters) {
-    @for(character of (characters || []); track character.id) {
-        <app-character-card [character]="character"></app-character-card>
+<app-loader [waitfor]="characters$">
+    @if(characters$ | async; as characters) {
+        @for(character of (characters || []); track trackByFn($index, character)) {
+            <app-character-card [character]="character"></app-character-card>
+        }
     }
-}
-
     <mat-paginator
         [length]="totalElements"
         [pageSize]="6"
@@ -11,4 +11,6 @@
         [pageIndex]="currentPage - 1"
         (page)="onPageChange($event)">
     </mat-paginator>
+
+</app-loader>
 

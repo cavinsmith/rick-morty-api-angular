@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 
 import { Character } from '../../store/models/character.model';
 import { CharacterCard } from '../character-card/character-card';
+import { Loader } from "../loader/loader";
 
 @Component({
   selector: 'showcase-characters',
-  imports: [CommonModule, CharacterCard, MatPaginatorModule],
+  imports: [CommonModule, CharacterCard, MatPaginatorModule, Loader],
   templateUrl: './showcase-characters.html',
   styleUrl: './showcase-characters.scss',
 })
@@ -21,7 +22,7 @@ export class ShowcaseCharacters implements OnInit {
 
   characters$!: Observable<(Character)[]>
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.updateCharacters();
   }
 
@@ -41,5 +42,10 @@ export class ShowcaseCharacters implements OnInit {
     const extractedIds = this.characterIds[this.currentPage - 1].map(url => parseInt(url.split('/').slice(-1)[0]));
     this.characters$ = this.charactersFacade.getRecords(extractedIds);
   }
+
+  trackByFn(index: number, item: any): any {
+    return item.id || item.name || index;
+  }
+
 
 }

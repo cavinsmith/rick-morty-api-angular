@@ -8,7 +8,7 @@
       [matAutocomplete]="auto"      
       placeholder="Start typing {{searchName}}...">
     <mat-autocomplete #auto="matAutocomplete">
-      @for (option of items$ | async; track option) {
+      @for (option of items$ | async; track option.id) {
         <mat-option [value]="option.value" (onSelectionChange)="onSelect(option)">
           {{option.value}}
         </mat-option>

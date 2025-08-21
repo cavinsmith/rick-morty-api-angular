@@ -18,10 +18,4 @@ export class ListEpisodes {
   initialPage: number = 1;
   filter: EpisodeFilter = {};
   episodeRouterLink = routeConstants.ROUTE_EPISODE;
-
-  setEpisodeName(name: string) {
-    this.filter = {
-      name
-    }
-  }
 }

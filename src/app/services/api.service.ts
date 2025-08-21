@@ -93,7 +93,6 @@ export class ApiService {
   }
 
   async getCharactersInDimension(dimension: string): Promise<{ residents: string[], locations: Location[] }> {
-    console.log(`Fetching characters in dimension: ${dimension}`);
     const locations = await getLocations({ dimension });
     if(locations.status !== 200 || !locations.data.info) {
       throw new Error(`Failed to fetch characters in dimension ${dimension} with status message: ${locations.statusMessage}`);

@@ -11,10 +11,11 @@ import { LocationsFacade } from '../../store/facades/locations.facade';
 import { Location } from '../../store/models/location.model';
 import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 import { DimensionsFacade } from '../../store/facades/dimensions.facade';
+import { Loader } from "../../components/loader/loader";
 
 @Component({
   selector: 'app-page-dimension',
-  imports: [CommonModule, Title, ShowcaseCharacters],
+  imports: [CommonModule, Title, ShowcaseCharacters, Loader],
   templateUrl: './dimension.html',
   styleUrl: './dimension.scss',
 })
@@ -33,7 +34,6 @@ export class Dimension implements OnChanges, OnInit {
   locations$!: Observable<any>;
   locationsTotalPages$!: Observable<any>;
   dimension$!: Observable<any>;
-  paginatedData$!: Observable<any>;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -56,24 +56,5 @@ export class Dimension implements OnChanges, OnInit {
       filter((location): location is Location => !!location && !!location.dimension),
       switchMap(location => this.dimensionsFacade.getAllCharactersInDimension(location.dimension))
     );
-
-
-/*
-    this.locationsTotalPages$ = this.location$.pipe(
-      filter((location): location is Location => !!location && !!location.dimension),
-      switchMap(location => this.locationsPagesFacade.getTotalPagesAndItems())
-    );
-*/
-  //  this.dimension$ = this.dimensionsFacade.getAllCharactersInDimension(this.currentLocation.toString())
-  }
-
-  previousPage() {
-    this.initialPage--;
-    this.updateLocation();
-  }
-
-  nextPage() {
-    this.initialPage++
-    this.updateLocation();    
   }
 }

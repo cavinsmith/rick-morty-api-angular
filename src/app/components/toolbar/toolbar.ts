@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import * as routeConstants from '../../constants/routes';
+import { Portal } from "../portal/portal";
 
 interface RouteLink {
   path: string;
@@ -12,7 +13,7 @@ interface RouteLink {
 
 @Component({
   selector: 'app-toolbar',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule, Portal],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -10,10 +10,11 @@ import { Text } from "../../components/text/text";
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
 
 import { PaginatePipe } from "../../pipes/paginate";
+import { Loader } from "../../components/loader/loader";
 
 @Component({
   selector: 'app-page-location',
-  imports: [CommonModule, Title, Text, PaginatePipe, ShowcaseCharacters],
+  imports: [CommonModule, Title, Text, PaginatePipe, ShowcaseCharacters, Loader],
   templateUrl: './location.html',
   styleUrl: './location.scss',
 })

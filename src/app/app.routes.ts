@@ -9,6 +9,7 @@ import { Episode } from './pages/episode/episode';
 import { Search } from './pages/search/search';
 import { Dimension } from './pages/dimension/dimension';
 import { Dimensions } from './pages/dimensions/dimensions';
+import { Home } from './pages/home/home';
 
 import * as routesConstants from './constants/routes';
 
@@ -22,5 +23,6 @@ export const routes: Routes = [
   { path: routesConstants.ROUTE_CHARACTER_ROUTER, component: Character },
   { path: routesConstants.ROUTE_DIMENSION_ROUTER, component: Dimension },
   { path: routesConstants.ROUTE_DIMENSIONS, component: Dimensions },
+  { path: '', component: Home },
 
 ];
