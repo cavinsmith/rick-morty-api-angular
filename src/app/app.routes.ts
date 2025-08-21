@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ApiTest } from './components/api-test/api-test';
-import { ListLocations } from './components/list-locations/list-locations';
-import { ListEpisodes } from './components/list-episodes/list-episodes';
+import { ListLocations } from './pages/locations/locations';
+import { ListEpisodes } from './pages/episodes/episodes';
 
 import * as routesConstants from './constants/routes';
 

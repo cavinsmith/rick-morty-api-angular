@@ -6,14 +6,13 @@ import { Character } from '../../store/models/character.model';
 import { Location } from '../../store/models/location.model';
 import { CharacterCard } from '../character-card/character-card';
 import { LocationsFacade } from '../../store/facades/locations.facade';
-import { ListLocations } from '../list-locations/list-locations';
 import { Search } from '../search/search';
 import { EpisodesPagesFacade } from '../../store/facades/episodes-pages.facade';
 import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 
 @Component({
   selector: 'app-api-test',
-  imports: [CommonModule, CharacterCard, ListLocations, Search],
+  imports: [CommonModule, CharacterCard, Search],
   templateUrl: './api-test.html',
   styleUrl: './api-test.scss'
 })

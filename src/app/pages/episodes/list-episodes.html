@@ -1,8 +1,0 @@
-<button (click)="setEpisodeName('Jerry')">Jerry</button>
-
-<app-generic-list [pagesFacade]="episodesFacade" [initialPage]="initialPage" [filter]="filter">
-    <ng-template #itemTemplate let-episode>
-        <p>Episode: {{episode.name}}</p>
-    </ng-template>
-</app-generic-list>
-

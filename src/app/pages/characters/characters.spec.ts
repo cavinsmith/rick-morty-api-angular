@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListLocations } from './list-episodes';
+import { ApiTest } from './characters';
 
-describe('ListLocations', () => {
-  let component: ListLocations;
-  let fixture: ComponentFixture<ListLocations>;
+describe('ApiTest', () => {
+  let component: ApiTest;
+  let fixture: ComponentFixture<ApiTest>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListLocations]
+      imports: [ApiTest]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListLocations);
+    fixture = TestBed.createComponent(ApiTest);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
