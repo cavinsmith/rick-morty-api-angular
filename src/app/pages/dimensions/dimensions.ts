@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { Title } from '../../components/title/title';
-import { Text } from '../../components/text/text';
-import { DimensionsFacade } from '../../store/facades/dimensions.facade';
 import { CommonModule } from '@angular/common';
-import { Loader } from '../../components/loader/loader';
+import { Component, inject } from '@angular/core';
 import { Link } from '../../components/link/link';
+import { Loader } from '../../components/loader/loader';
+import { Text } from '../../components/text/text';
+import { Title } from '../../components/title/title';
 import * as routesConstants from '../../constants/routes';
+import { DimensionsFacade } from '../../store/facades/dimensions.facade';
 
 @Component({
   selector: 'app-page-dimensions',

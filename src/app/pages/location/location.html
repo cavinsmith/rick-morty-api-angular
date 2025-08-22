@@ -3,7 +3,9 @@
     <app-title>{{ location.name }}</app-title>
     <app-text>
       Type: {{ location.type }}<br />
-      Dimension: {{ location.dimension }}<br />
+      Dimension:
+      <app-link [link]="['/', dimensionsRoute, location.id]" [text]="location.dimension"></app-link
+      ><br />
       Residents amount: {{ location.residents.length }}<br />
     </app-text>
     <app-showcase-characters

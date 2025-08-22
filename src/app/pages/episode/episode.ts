@@ -1,25 +1,25 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   inject,
   Input,
   OnChanges,
-  SimpleChanges,
-  OnInit,
   OnDestroy,
+  OnInit,
+  SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { EpisodesFacade } from '../../store/facades/episodes.facade';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { EpisodesFacade } from '../../store/facades/episodes.facade';
 
-import { Title } from '../../components/title/title';
-import { Text } from '../../components/text/text';
 import { Loader } from '../../components/loader/loader';
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
+import { Text } from '../../components/text/text';
+import { Title } from '../../components/title/title';
 
-import { Episode as EpisodeModel } from '../../store/models/episode.model';
 import { PaginatePipe } from '../../pipes/paginate';
+import { Episode as EpisodeModel } from '../../store/models/episode.model';
 
 @Component({
   selector: 'app-page-episode',
@@ -30,7 +30,6 @@ import { PaginatePipe } from '../../pipes/paginate';
 export class Episode implements OnChanges, OnInit, OnDestroy {
   episodesFacade = inject(EpisodesFacade);
   route = inject(ActivatedRoute);
-
   @Input() currentEpisode = 55;
   @Input() id!: string;
 

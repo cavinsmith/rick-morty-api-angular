@@ -93,3 +93,24 @@ body {
   --mat-button-text-label-text-font: 'Get Schwifty', sans-serif;
   --mat-button-text-label-text-size: 22px;
 }
+
+.mat-mdc-paginator-container {
+  justify-content: flex-start !important  ;
+}
+.mat-mdc-paginator-page-size-label,
+.mat-mdc-paginator-page-size-value {
+  display: none;
+}
+
+.mat-mdc-paginator-range-actions {
+  background-color: var(--morty-lime);
+  color: var(--rick-black);
+  border: 4px solid var(--morty-lime);
+  box-shadow: 4px 4px 0px var(--rick-black);
+  margin-bottom: 16px;
+  padding-left: 16px;
+}
+
+.mat-mdc-paginator-range-label {
+  margin: 0 32px 0 0px !important;
+}

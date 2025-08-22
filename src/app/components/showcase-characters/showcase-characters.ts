@@ -1,16 +1,17 @@
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { Component, inject, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CharactersFacade } from '../../store/facades/characters.facade';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
+import { CharactersFacade } from '../../store/facades/characters.facade';
 
 import { Character } from '../../store/models/character.model';
 import { CharacterCard } from '../character-card/character-card';
 import { Loader } from '../loader/loader';
+import { Text } from '../text/text';
 
 @Component({
   selector: 'app-showcase-characters',
-  imports: [CommonModule, CharacterCard, MatPaginatorModule, Loader],
+  imports: [CommonModule, CharacterCard, MatPaginatorModule, Loader, Text],
   templateUrl: './showcase-characters.html',
   styleUrl: './showcase-characters.scss',
 })
@@ -19,6 +20,7 @@ export class ShowcaseCharacters implements OnInit, OnChanges {
   currentPage = 1;
   @Input() characterIds: string[][] = [];
   totalElements!: number;
+  showPaginator = true;
 
   characters$!: Observable<Character[]>;
 
@@ -32,6 +34,7 @@ export class ShowcaseCharacters implements OnInit, OnChanges {
       this.totalElements = this.characterIds
         .map((ids) => ids.length)
         .reduce((acc, val) => acc + val, 0);
+      this.showPaginator = this.totalElements > 6;
     }
   }
 
@@ -41,6 +44,10 @@ export class ShowcaseCharacters implements OnInit, OnChanges {
   }
 
   updateCharacters() {
+    if (this.characterIds.length === 0) {
+      this.characters$ = this.charactersFacade.getRecords([]);
+      return;
+    }
     const extractedIds = this.characterIds[this.currentPage - 1].map((url) =>
       parseInt(url.split('/').slice(-1)[0]),
     );

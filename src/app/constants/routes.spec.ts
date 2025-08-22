@@ -1,17 +1,16 @@
 import {
-  ROUTE_API_TEST,
-  ROUTE_CHARACTERS,
   ROUTE_CHARACTER,
   ROUTE_CHARACTER_ROUTER,
-  ROUTE_DIMENSIONS,
+  ROUTE_CHARACTERS,
   ROUTE_DIMENSION,
   ROUTE_DIMENSION_ROUTER,
-  ROUTE_EPISODES,
+  ROUTE_DIMENSIONS,
   ROUTE_EPISODE,
   ROUTE_EPISODE_ROUTER,
-  ROUTE_LOCATIONS,
+  ROUTE_EPISODES,
   ROUTE_LOCATION,
   ROUTE_LOCATION_ROUTER,
+  ROUTE_LOCATIONS,
   ROUTE_SEARCH,
 } from './routes';
 
@@ -36,10 +35,6 @@ describe('Routes Constants', () => {
     expect(ROUTE_LOCATION_ROUTER).toBe('location/:id');
     expect(ROUTE_EPISODE_ROUTER).toBe('episode/:id');
     expect(ROUTE_DIMENSION_ROUTER).toBe('dimension/:id');
-  });
-
-  it('should export API test route constant', () => {
-    expect(ROUTE_API_TEST).toBe('api-test');
   });
 
   it('should have all constants as strings', () => {

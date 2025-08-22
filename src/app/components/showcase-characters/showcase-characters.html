@@ -1,16 +1,32 @@
 <app-loader [waitfor]="characters$">
-    @if(characters$ | async; as characters) {
-        @for(character of (characters || []); track trackByFn($index, character)) {
-            <app-character-card [character]="character"></app-character-card>
-        }
-    }
+  @if (showPaginator) {
     <mat-paginator
-        [length]="totalElements"
-        [pageSize]="6"
-        aria-label="Select page"
-        [pageIndex]="currentPage - 1"
-        (page)="onPageChange($event)">
+      [length]="totalElements"
+      [pageSize]="6"
+      aria-label="Select page"
+      [pageIndex]="currentPage - 1"
+      (page)="onPageChange($event)"
+    >
     </mat-paginator>
+  }
 
+  @if (characters$ | async; as characters) {
+    @for (character of characters || []; track trackByFn($index, character)) {
+      <app-character-card [character]="character"></app-character-card>
+    }
+  }
+  @if (totalElements === 0) {
+    <app-text>No characters found.</app-text>
+  }
+
+  @if (showPaginator) {
+    <mat-paginator
+      [length]="totalElements"
+      [pageSize]="6"
+      aria-label="Select page"
+      [pageIndex]="currentPage - 1"
+      (page)="onPageChange($event)"
+    >
+    </mat-paginator>
+  }
 </app-loader>
-
