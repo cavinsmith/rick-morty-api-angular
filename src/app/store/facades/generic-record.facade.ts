@@ -1,5 +1,5 @@
 import { Action, MemoizedSelector, Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 export abstract class GenericRecordFacade<T> {
   constructor(protected store: Store) {}
@@ -12,15 +12,13 @@ export abstract class GenericRecordFacade<T> {
   protected selectManyRecords?: (ids: number[]) => MemoizedSelector<object, T[]>;
 
   getRecord(id: number): Observable<T | undefined> {
-    this.store
-      .select(this.selectRecord(id))
-      .pipe(take(1))
-      .subscribe((item) => {
+    return this.store.select(this.selectRecord(id)).pipe(
+      tap((item) => {
         if (!item) {
           this.store.dispatch(this.loadAction({ id }));
         }
-      });
-    return this.store.select(this.selectRecord(id));
+      }),
+    );
   }
 
   getRecords(ids: number[]): Observable<T[]> {
@@ -30,10 +28,8 @@ export abstract class GenericRecordFacade<T> {
     if (!this.loadManyAction) {
       throw new Error('loadManyAction is not implemented');
     }
-    this.store
-      .select(this.selectManyRecords(ids))
-      .pipe(take(1))
-      .subscribe((items) => {
+    return this.store.select(this.selectManyRecords(ids)).pipe(
+      tap((items) => {
         const typedItems = items as { id: number }[];
         const existingIds = typedItems.map((item) => item.id);
         const missingIds: number[] = [];
@@ -45,7 +41,7 @@ export abstract class GenericRecordFacade<T> {
         if (missingIds.length && this.loadManyAction) {
           this.store.dispatch(this.loadManyAction({ ids: missingIds }));
         }
-      });
-    return this.store.select(this.selectManyRecords(ids));
+      }),
+    );
   }
 }

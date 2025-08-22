@@ -1,5 +1,5 @@
 import { Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
+import { Observable, tap, switchMap, take } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { MemoizedSelector } from '@ngrx/store';
 
@@ -21,15 +21,15 @@ export abstract class GenericPagesFacade<T, F> {
   >;
 
   getPage(page: number, filter: F): Observable<T | undefined> {
-    this.store
-      .select(this.selectPageIsLoaded(page, filter))
-      .pipe(take(1))
-      .subscribe((isLoaded) => {
+    return this.store.select(this.selectPageIsLoaded(page, filter)).pipe(
+      take(1),
+      tap((isLoaded) => {
         if (!isLoaded) {
           this.store.dispatch(this.loadAction({ page, filter }));
         }
-      });
-    return this.store.select(this.selectPage(page, filter));
+      }),
+      switchMap(() => this.store.select(this.selectPage(page, filter))),
+    );
   }
 
   getTotalPagesAndItems(): Observable<{ totalPages: number; totalItems: number }> {
