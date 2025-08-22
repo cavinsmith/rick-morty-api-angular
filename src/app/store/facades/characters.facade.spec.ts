@@ -51,7 +51,7 @@ describe('CharactersFacade', () => {
   it('should dispatch load action when character does not exist', () => {
     mockStore.select.and.returnValues(of(undefined), of(mockCharacter));
 
-    facade.getRecord(1);
+    facade.getRecord(1).subscribe();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(CharactersActions.loadCharacter({ id: 1 }));
   });
@@ -75,7 +75,7 @@ describe('CharactersFacade', () => {
       of([mockCharacter, { ...mockCharacter, id: 2 }]),
     );
 
-    facade.getRecords([1, 2]);
+    facade.getRecords([1, 2]).subscribe();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(CharactersActions.loadCharacters({ ids: [2] }));
   });
@@ -86,6 +86,7 @@ describe('CharactersFacade', () => {
     const result = facade.getRecords([1, 2]);
 
     expect(result).toBeDefined();
+    result.subscribe();
     expect(mockStore.dispatch).toHaveBeenCalledWith(
       CharactersActions.loadCharacters({ ids: [1, 2] }),
     );

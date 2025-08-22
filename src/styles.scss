@@ -114,3 +114,12 @@ body {
 .mat-mdc-paginator-range-label {
   margin: 0 32px 0 0px !important;
 }
+
+.mdc-text-field--filled,
+.mat-mdc-autocomplete-panel {
+  box-shadow: 4px 4px 0px var(--rick-black) !important;
+}
+
+.mat-mdc-autocomplete-panel {
+  box-shadow: 4px 4px 0px var(--morty-lime) !important;
+}

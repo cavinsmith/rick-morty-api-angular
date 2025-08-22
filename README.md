@@ -9,11 +9,23 @@
 - Individual page of Character from list of Characters
 - Error handling for API requests (snackbar notifications)
 
+## Developer stuff
+
+- unit tests (karma)
+- e2e tests (cypress)
+- eslint + pretty-quick
+- Github Actions pipeline for unit tests, linter, building and deploying to Github Pages
+- husky to lint and prettify commits
+- all development done via feature branches and pull requests
+- Angular AI rules for Github copilot
+- VSCode configuration files
+
 ## Development server
 
 To start a local development server, run:
 
 ```bash
+npm install
 ng serve
 ```
 

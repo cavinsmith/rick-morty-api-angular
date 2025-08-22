@@ -46,7 +46,7 @@ describe('CharactersPagesFacade', () => {
   it('should dispatch load action when page is not loaded', () => {
     mockStore.select.and.returnValues(of(false), of(mockCharacters));
 
-    facade.getPage(1, mockFilter);
+    facade.getPage(1, mockFilter).subscribe();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(
       CharactersPagesActions.loadCharactersPages({ page: 1, filter: mockFilter }),
@@ -56,7 +56,7 @@ describe('CharactersPagesFacade', () => {
   it('should not dispatch load action when page is already loaded', () => {
     mockStore.select.and.returnValues(of(true), of(mockCharacters));
 
-    facade.getPage(1, mockFilter);
+    facade.getPage(1, mockFilter).subscribe();
 
     expect(mockStore.dispatch).not.toHaveBeenCalled();
   });
@@ -87,7 +87,7 @@ describe('CharactersPagesFacade', () => {
     const emptyFilter: CharacterFilter = {};
     mockStore.select.and.returnValues(of(false), of(mockCharacters));
 
-    facade.getPage(1, emptyFilter);
+    facade.getPage(1, emptyFilter).subscribe();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(
       CharactersPagesActions.loadCharactersPages({ page: 1, filter: emptyFilter }),
@@ -97,7 +97,7 @@ describe('CharactersPagesFacade', () => {
   it('should handle different page numbers', () => {
     mockStore.select.and.returnValues(of(false), of(mockCharacters));
 
-    facade.getPage(3, mockFilter);
+    facade.getPage(3, mockFilter).subscribe();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(
       CharactersPagesActions.loadCharactersPages({ page: 3, filter: mockFilter }),

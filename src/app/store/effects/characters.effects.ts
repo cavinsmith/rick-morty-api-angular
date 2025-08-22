@@ -1,12 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as CharacterActions from '../actions/characters.actions';
-import { catchError, mergeMap, withLatestFrom, of, from, EMPTY, map } from 'rxjs';
-import { ApiService } from '../../services/api.service';
 import { Store } from '@ngrx/store';
-import { selectCharacters } from '../selectors/characters.selectors';
-import { Character } from '../models/character.model';
 import { Character as ApiCharacter } from 'rickmortyapi';
+import { EMPTY, catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { ApiService } from '../../services/api.service';
+import * as CharacterActions from '../actions/characters.actions';
+import { Character } from '../models/character.model';
+import { selectCharacters } from '../selectors/characters.selectors';
 
 @Injectable()
 export class CharactersEffects {
@@ -24,7 +24,7 @@ export class CharactersEffects {
     this.actions$.pipe(
       ofType(CharacterActions.loadCharacter),
       withLatestFrom(this.store.select(selectCharacters)),
-      mergeMap(([{ id }, characters]) => {
+      switchMap(([{ id }, characters]) => {
         const character = characters[id];
         return character
           ? EMPTY
@@ -46,7 +46,7 @@ export class CharactersEffects {
     this.actions$.pipe(
       ofType(CharacterActions.loadCharacters),
       withLatestFrom(this.store.select(selectCharacters)),
-      mergeMap(([{ ids }, characters]) => {
+      switchMap(([{ ids }, characters]) => {
         const missingIds = ids.filter((id) => !characters[id]);
         return missingIds.length
           ? from(this.apiService.getMultipleCharacters(missingIds)).pipe(
