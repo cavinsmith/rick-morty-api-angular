@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 import { isEqual } from '../../utils/is-equal';
 
@@ -22,7 +22,7 @@ import { isEqual } from '../../utils/is-equal';
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
-export class Search<T extends { id: number }, F> implements OnInit {
+export class Search<T extends { id: number }, F> implements OnInit, OnDestroy {
   searchControl = new FormControl('');
   @Input() pagesFacade!: GenericPagesFacade<T[], F>;
   @Input() routeLink!: string;
@@ -33,11 +33,12 @@ export class Search<T extends { id: number }, F> implements OnInit {
 
   items$!: Observable<{ id: number; value: string }[] | undefined>;
   private readonly router = inject(Router);
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit() {
     this.updatePage();
     this.searchControl.valueChanges
-      .pipe(startWith(''), debounceTime(300), distinctUntilChanged())
+      .pipe(startWith(''), debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((value) => {
         const currentSearchFilter = { ...this.searchFilter };
         if (value && value.trim()) {
@@ -49,6 +50,11 @@ export class Search<T extends { id: number }, F> implements OnInit {
           this.updatePage();
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private updatePage() {

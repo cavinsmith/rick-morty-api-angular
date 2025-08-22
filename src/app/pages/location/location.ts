@@ -1,8 +1,17 @@
-import { Component, inject, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { LocationsFacade } from '../../store/facades/locations.facade';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Location as LocationModel } from '../../store/models/location.model';
 
 import { Title } from '../../components/title/title';
@@ -18,7 +27,7 @@ import { Loader } from '../../components/loader/loader';
   templateUrl: './location.html',
   styleUrl: './location.scss',
 })
-export class Location implements OnChanges, OnInit {
+export class Location implements OnChanges, OnInit, OnDestroy {
   locationsFacade = inject(LocationsFacade);
   route = inject(ActivatedRoute);
 
@@ -26,14 +35,20 @@ export class Location implements OnChanges, OnInit {
   @Input() id!: string;
 
   location$!: Observable<LocationModel | undefined>;
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       if (params['id']) {
         this.currentLocation = +params['id'];
         this.updateLocation();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

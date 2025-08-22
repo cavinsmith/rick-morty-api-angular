@@ -1,8 +1,17 @@
-import { Component, inject, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { EpisodesFacade } from '../../store/facades/episodes.facade';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Title } from '../../components/title/title';
 import { Text } from '../../components/text/text';
@@ -18,7 +27,7 @@ import { PaginatePipe } from '../../pipes/paginate';
   templateUrl: './episode.html',
   styleUrl: './episode.scss',
 })
-export class Episode implements OnChanges, OnInit {
+export class Episode implements OnChanges, OnInit, OnDestroy {
   episodesFacade = inject(EpisodesFacade);
   route = inject(ActivatedRoute);
 
@@ -26,14 +35,20 @@ export class Episode implements OnChanges, OnInit {
   @Input() id!: string;
 
   episode$!: Observable<EpisodeModel | undefined>;
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       if (params['id']) {
         this.currentEpisode = +params['id'];
         this.updateEpisode();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
