@@ -1,5 +1,7 @@
 # Rick and Morty API
 
+![Rick And Morty](https://raw.githubusercontent.com/cavinsmith/rick-morty-api-angular/refs/heads/master/public/images/animation.gif)
+
 ## Features
 
 - Search for Locations / List Dimensions -> Show all characters from location paginated in form of a card
