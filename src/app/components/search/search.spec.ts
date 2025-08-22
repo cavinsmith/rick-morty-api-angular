@@ -37,7 +37,6 @@ describe('Search Component', () => {
     >;
     mockRouter = TestBed.inject(Router) as jasmine.SpyObj<Router>;
 
-    // Set required inputs
     component.pagesFacade = mockGenericPagesFacade;
     component.routeLink = 'characters';
 

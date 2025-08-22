@@ -1,11 +1,12 @@
 import { Character } from '../models/character.model';
 // TODO: Move here state definition
-import { LocationsState } from '../reducers/locations.reducer';
-import { LocationsPagesState } from '../reducers/locations-pages.reducer';
-import { EpisodesPagesState } from '../reducers/episodes-pages.reducer';
-import { EpisodesState } from '../reducers/episodes.reducer';
 import { CharactersPagesState } from '../reducers/characters-pages.reducer';
 import { DimensionsState } from '../reducers/dimensions.reducer';
+import { EpisodesPagesState } from '../reducers/episodes-pages.reducer';
+import { EpisodesState } from '../reducers/episodes.reducer';
+import { ErrorState } from '../reducers/error.reducer';
+import { LocationsPagesState } from '../reducers/locations-pages.reducer';
+import { LocationsState } from '../reducers/locations.reducer';
 
 export type CharacterObject = Record<number, Character>;
 
@@ -23,4 +24,5 @@ export interface AppState {
   episodes: EpisodesState;
   episodesPages: EpisodesPagesState;
   dimensions: DimensionsState;
+  error: ErrorState;
 }

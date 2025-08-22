@@ -1,5 +1,3 @@
-// выглядит ок
-
 import { createReducer, on } from '@ngrx/store';
 import { LocationFilter } from 'rickmortyapi';
 import { isEqual } from '../../utils/is-equal';

@@ -1,5 +1,3 @@
-// выглядит ок
-
 import { createReducer, on } from '@ngrx/store';
 import * as DimensionActions from '../actions/dimensions.actions';
 import { Dimension } from '../models/dimension.model';

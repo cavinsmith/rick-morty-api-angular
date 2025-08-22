@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,7 +27,6 @@ export class Search<T extends { id: number }, F> implements OnInit, OnDestroy {
   @Input() pagesFacade!: GenericPagesFacade<T[], F>;
   @Input() routeLink!: string;
   searchFilter: F = {} as F;
-  // Parameter input value of search field e.g. "dimension" or "name"
   @Input() searchParameter = 'name';
   @Input() searchName = 'unknown';
 
@@ -58,7 +57,6 @@ export class Search<T extends { id: number }, F> implements OnInit, OnDestroy {
   }
 
   private updatePage() {
-    // need to filter the results by value
     this.items$ = this.pagesFacade.getPage(1, this.searchFilter).pipe(
       map((entities) => {
         if (!entities) return [];
@@ -70,10 +68,8 @@ export class Search<T extends { id: number }, F> implements OnInit, OnDestroy {
           };
         });
 
-        // Filter out undefined/null values and remove duplicates
         const validValues = values.filter((item) => item.value != null && item.value !== '');
 
-        // Remove duplicates based on value property
         const uniqueValues = validValues.filter(
           (item, index, array) => index === array.findIndex((t) => t.value === item.value),
         );
@@ -83,7 +79,6 @@ export class Search<T extends { id: number }, F> implements OnInit, OnDestroy {
     );
   }
 
-  // onselect event for mat-option
   public onSelect(option: { id: number; value: string }) {
     this.router.navigate(['/', this.routeLink, option.id]);
   }
