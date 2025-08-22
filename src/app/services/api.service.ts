@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import {
+  Character,
+  CharacterFilter,
+  Episode,
+  EpisodeFilter,
   getCharacter,
   getCharacters,
-  CharacterFilter,
   getEpisode,
   getEpisodes,
   getLocation,
   getLocations,
-  Character,
-  Episode,
   Location,
-  EpisodeFilter,
   LocationFilter,
 } from 'rickmortyapi';
 
@@ -65,7 +65,7 @@ export class ApiService {
     filter: LocationFilter = {},
   ): Promise<{ locations: Location[]; pages: number; items: number }> {
     const locations = await getLocations({ page, ...filter });
-    if (locations.status === 200 || !locations.data.info) {
+    if (locations.status === 200) {
       return {
         locations: locations.data.results || [],
         pages: locations.data.info?.pages || 0,
@@ -81,7 +81,7 @@ export class ApiService {
     filter: CharacterFilter = {},
   ): Promise<{ characters: Character[]; pages: number; items: number }> {
     const characters = await getCharacters({ page, ...filter });
-    if (characters.status === 200 || !characters.data.info) {
+    if (characters.status === 200) {
       return {
         characters: characters.data.results || [],
         pages: characters.data.info?.pages || 0,
@@ -99,7 +99,7 @@ export class ApiService {
     filter: EpisodeFilter = {},
   ): Promise<{ episodes: Episode[]; pages: number; items: number }> {
     const episodes = await getEpisodes({ page, ...filter });
-    if (episodes.status === 200 || !episodes.data.info) {
+    if (episodes.status === 200) {
       return {
         episodes: episodes.data.results || [],
         pages: episodes.data.info?.pages || 0,
