@@ -2,7 +2,7 @@ name: CI/CD Pipeline - Angular v20
 
 on:
   push:
-    branches: [feature/github-actions-deploy-routines-v2, master]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy to GitHub Pages
     needs: test-and-build
-    #    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
     environment:
       name: github-pages
