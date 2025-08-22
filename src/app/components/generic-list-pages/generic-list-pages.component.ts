@@ -1,17 +1,17 @@
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 import {
   Component,
-  Input,
-  TemplateRef,
-  OnInit,
   ContentChild,
+  Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
-import { isEqual } from 'lodash';
+import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
+import { isEqual } from '../../utils/is-equal';
 import { Loader } from '../loader/loader';
 
 @Component({

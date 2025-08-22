@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { isEqual } from 'lodash';
-import { debounceTime, distinctUntilChanged, startWith, map } from 'rxjs/operators';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
+import { isEqual } from '../../utils/is-equal';
 
 @Component({
   selector: 'app-search',

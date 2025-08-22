@@ -1,8 +1,6 @@
-// выглядит ок
-
 import { createReducer, on } from '@ngrx/store';
-import { isEqual } from 'lodash';
 import { EpisodeFilter } from 'rickmortyapi';
+import { isEqual } from '../../utils/is-equal';
 import * as EpisodesPagesActions from '../actions/episodes-pages.actions';
 import { Episode } from '../models/episode.model';
 
