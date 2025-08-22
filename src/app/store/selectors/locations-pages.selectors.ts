@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { LocationsPagesState } from '../reducers/locations-pages.reducer';
-import { isEqual } from 'lodash';
 import { LocationFilter } from 'rickmortyapi';
+import { isEqual } from '../../utils/is-equal';
+import { LocationsPagesState } from '../reducers/locations-pages.reducer';
 
 export const selectLocationsPagesState =
   createFeatureSelector<LocationsPagesState>('locationsPages');

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Search } from './search';
 import { CharactersPagesFacade } from '../../store/facades/characters-pages.facade';
-import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
 import { EpisodesPagesFacade } from '../../store/facades/episodes-pages.facade';
+import { LocationsPagesFacade } from '../../store/facades/locations-pages-facade';
+import { Search } from './search';
 
 describe('Search', () => {
   let component: Search;

@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CharactersPagesState } from '../reducers/characters-pages.reducer';
-import { isEqual } from 'lodash';
 import { CharacterFilter } from 'rickmortyapi';
+import { isEqual } from '../../utils/is-equal';
+import { CharactersPagesState } from '../reducers/characters-pages.reducer';
 
 export const selectCharactersPagesState =
   createFeatureSelector<CharactersPagesState>('charactersPages');

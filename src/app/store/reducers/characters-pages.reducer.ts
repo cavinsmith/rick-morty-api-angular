@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { isEqual } from 'lodash';
 import { CharacterFilter } from 'rickmortyapi';
+import { isEqual } from '../../utils/is-equal';
 import * as CharactersPagesActions from '../actions/characters-pages.actions';
 import { Character } from '../models/character.model';
 import { PAGINATION_INITIAL_STATE, PaginationModel } from './episodes-pages.reducer';

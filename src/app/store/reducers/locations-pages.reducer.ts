@@ -1,8 +1,8 @@
 // выглядит ок
 
 import { createReducer, on } from '@ngrx/store';
-import { isEqual } from 'lodash';
 import { LocationFilter } from 'rickmortyapi';
+import { isEqual } from '../../utils/is-equal';
 import * as LocationsPagesActions from '../actions/locations-pages.actions';
 import { Location } from '../models/location.model';
 

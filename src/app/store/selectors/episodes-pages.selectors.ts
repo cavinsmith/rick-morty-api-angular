@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { EpisodesPagesState } from '../reducers/episodes-pages.reducer';
-import { isEqual } from 'lodash';
 import { EpisodeFilter } from 'rickmortyapi';
+import { isEqual } from '../../utils/is-equal';
+import { EpisodesPagesState } from '../reducers/episodes-pages.reducer';
 
 export const selectEpisodesPagesState = createFeatureSelector<EpisodesPagesState>('episodesPages');
 

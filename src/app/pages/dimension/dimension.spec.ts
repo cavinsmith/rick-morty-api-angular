@@ -50,9 +50,6 @@ describe('Dimension', () => {
     fixture = TestBed.createComponent(Dimension);
     component = fixture.componentInstance;
     mockLocationsFacade = TestBed.inject(LocationsFacade) as jasmine.SpyObj<LocationsFacade>;
-    mockLocationsPagesFacade = TestBed.inject(
-      LocationsPagesFacade,
-    ) as jasmine.SpyObj<LocationsPagesFacade>;
     mockDimensionsFacade = TestBed.inject(DimensionsFacade) as jasmine.SpyObj<DimensionsFacade>;
     mockActivatedRoute = TestBed.inject(ActivatedRoute) as jasmine.SpyObj<ActivatedRoute>;
 
