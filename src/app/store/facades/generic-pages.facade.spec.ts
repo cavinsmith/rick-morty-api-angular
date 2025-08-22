@@ -13,7 +13,6 @@ describe('GenericPagesFacade', () => {
   });
 
   it('should be an abstract class that cannot be instantiated directly', () => {
-    // Test that the class is designed to be extended, not instantiated directly
     expect(GenericPagesFacade.prototype.constructor.name).toBe('GenericPagesFacade');
     expect(typeof GenericPagesFacade.prototype.getPage).toBe('function');
     expect(typeof GenericPagesFacade.prototype.getTotalPagesAndItems).toBe('function');

@@ -1,8 +1,17 @@
-import { Component, inject, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CharactersFacade } from '../../store/facades/characters.facade';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Character as CharacterModel } from '../../store/models/character.model';
 
 import { CharacterCard } from '../../components/character-card/character-card';
@@ -14,7 +23,7 @@ import { Loader } from '../../components/loader/loader';
   templateUrl: './character.html',
   styleUrl: './character.scss',
 })
-export class Character implements OnChanges, OnInit {
+export class Character implements OnChanges, OnInit, OnDestroy {
   charactersFacade = inject(CharactersFacade);
   route = inject(ActivatedRoute);
 
@@ -22,14 +31,20 @@ export class Character implements OnChanges, OnInit {
   @Input() id!: string;
 
   character$!: Observable<CharacterModel | undefined>;
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       if (params['id']) {
         this.currentCharacter = +params['id'];
         this.updateCharacter();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith, takeUntil } from 'rxjs/operators';
 import { GenericPagesFacade } from '../../store/facades/generic-pages.facade';
 import { isEqual } from '../../utils/is-equal';
 
@@ -22,22 +22,22 @@ import { isEqual } from '../../utils/is-equal';
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
-export class Search<T extends { id: number }, F> implements OnInit {
+export class Search<T extends { id: number }, F> implements OnInit, OnDestroy {
   searchControl = new FormControl('');
   @Input() pagesFacade!: GenericPagesFacade<T[], F>;
   @Input() routeLink!: string;
   searchFilter: F = {} as F;
-  // Parameter input value of search field e.g. "dimension" or "name"
   @Input() searchParameter = 'name';
   @Input() searchName = 'unknown';
 
   items$!: Observable<{ id: number; value: string }[] | undefined>;
   private readonly router = inject(Router);
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit() {
     this.updatePage();
     this.searchControl.valueChanges
-      .pipe(startWith(''), debounceTime(300), distinctUntilChanged())
+      .pipe(startWith(''), debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((value) => {
         const currentSearchFilter = { ...this.searchFilter };
         if (value && value.trim()) {
@@ -51,8 +51,12 @@ export class Search<T extends { id: number }, F> implements OnInit {
       });
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   private updatePage() {
-    // need to filter the results by value
     this.items$ = this.pagesFacade.getPage(1, this.searchFilter).pipe(
       map((entities) => {
         if (!entities) return [];
@@ -64,10 +68,8 @@ export class Search<T extends { id: number }, F> implements OnInit {
           };
         });
 
-        // Filter out undefined/null values and remove duplicates
         const validValues = values.filter((item) => item.value != null && item.value !== '');
 
-        // Remove duplicates based on value property
         const uniqueValues = validValues.filter(
           (item, index, array) => index === array.findIndex((t) => t.value === item.value),
         );
@@ -77,7 +79,6 @@ export class Search<T extends { id: number }, F> implements OnInit {
     );
   }
 
-  // onselect event for mat-option
   public onSelect(option: { id: number; value: string }) {
     this.router.navigate(['/', this.routeLink, option.id]);
   }

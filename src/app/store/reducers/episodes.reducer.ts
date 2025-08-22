@@ -1,5 +1,3 @@
-// выглядит ок
-
 import { createReducer, on } from '@ngrx/store';
 import * as EpisodeActions from '../actions/episodes.actions';
 import { Episode } from '../models/episode.model';

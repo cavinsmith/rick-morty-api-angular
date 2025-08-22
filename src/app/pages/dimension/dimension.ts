@@ -1,7 +1,15 @@
-import { Component, inject, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { filter, Observable, switchMap } from 'rxjs';
+import { filter, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 
 import { Title } from '../../components/title/title';
 import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
@@ -19,7 +27,7 @@ import { Loader } from '../../components/loader/loader';
   templateUrl: './dimension.html',
   styleUrl: './dimension.scss',
 })
-export class Dimension implements OnChanges, OnInit {
+export class Dimension implements OnChanges, OnInit, OnDestroy {
   locationsFacade = inject(LocationsFacade);
   locationsPagesFacade = inject(LocationsPagesFacade);
   dimensionsFacade = inject(DimensionsFacade);
@@ -34,14 +42,20 @@ export class Dimension implements OnChanges, OnInit {
   locations$!: Observable<Location[] | undefined>;
   locationsTotalPages$!: Observable<{ totalPages: number; totalItems: number }>;
   dimension$!: Observable<DimensionModel | undefined>;
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       if (params['id']) {
         this.currentLocation = +params['id'];
         this.updateLocation();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

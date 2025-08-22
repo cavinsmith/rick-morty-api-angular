@@ -1,4 +1,3 @@
-
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
@@ -7,14 +6,16 @@
 @use '@angular/material' as mat;
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$cyan-palette,
-      tertiary: mat.$orange-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$cyan-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
 
 body {
@@ -35,16 +36,23 @@ body {
 }
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Atma, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Atma, 'Helvetica Neue', sans-serif;
+}
 
 @font-face {
-    font-family: 'Get Schwifty';
-    src: url('assets/fonts/GetSchwifty-Regular.woff2') format('woff2'),
-         url('assets/fonts/GetSchwifty-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Get Schwifty';
+  src:
+    url('assets/fonts/GetSchwifty-Regular.woff2') format('woff2'),
+    url('assets/fonts/GetSchwifty-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -81,7 +89,7 @@ body { margin: 0; font-family: Atma, "Helvetica Neue", sans-serif; }
   --mat-option-label-text-color: var(--morty-white);
   --mat-card-elevated-container-color: var(--morty-lime);
   --mat-card-elevated-container-shape: 0;
-
+  --mat-snack-bar-supporting-text-font: 'Atma', Helvetica, sans-serif;
+  --mat-button-text-label-text-font: 'Get Schwifty', sans-serif;
+  --mat-button-text-label-text-size: 22px;
 }
-
-

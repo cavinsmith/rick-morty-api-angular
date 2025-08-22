@@ -1,6 +1,3 @@
-// Temporary
-export const ROUTE_API_TEST = 'api-test';
-
 export const ROUTE_LOCATIONS = 'locations';
 export const ROUTE_EPISODES = 'episodes';
 export const ROUTE_SEARCH = 'search';
