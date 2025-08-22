@@ -37,10 +37,12 @@ jobs:
         with:
           chrome-version: stable
 
-      #      - name: Run unit tests
-      #        run: |
-      #          export CHROME_BIN=/opt/hostedtoolcache/setup-chrome/chromium/stable/x64/chrome
-      #          npm run test -- --watch=false --browsers=ChromeHeadless
+      - name: Run unit tests
+        run: |
+          export CHROME_BIN=$(which google-chrome-stable)
+          npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+        env:
+          CHROME_BIN: /usr/bin/google-chrome-stable
 
       - name: Run linting (optional)
         run: npm run lint || true

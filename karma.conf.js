@@ -1,6 +1,6 @@
 module.exports = function (config) {
   config.set({
-    browsers: ['ChromeHeadlessNoSandbox, ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
@@ -11,6 +11,11 @@ module.exports = function (config) {
           '--disable-dev-shm-usage',
           '--disable-web-security',
           '--remote-debugging-port=9222',
+          '--headless',
+          '--disable-extensions',
+          '--disable-background-timer-throttling',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-renderer-backgrounding',
         ],
       },
     },
