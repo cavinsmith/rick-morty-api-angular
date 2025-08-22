@@ -1,36 +1,39 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   inject,
   Input,
   OnChanges,
-  SimpleChanges,
-  OnInit,
   OnDestroy,
+  OnInit,
+  SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { LocationsFacade } from '../../store/facades/locations.facade';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { LocationsFacade } from '../../store/facades/locations.facade';
 import { Location as LocationModel } from '../../store/models/location.model';
 
-import { Title } from '../../components/title/title';
-import { Text } from '../../components/text/text';
-import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
-
-import { PaginatePipe } from '../../pipes/paginate';
+import { Link } from '../../components/link/link';
 import { Loader } from '../../components/loader/loader';
+import { ShowcaseCharacters } from '../../components/showcase-characters/showcase-characters';
+import { Text } from '../../components/text/text';
+import { Title } from '../../components/title/title';
+
+import * as routesConstants from '../../constants/routes';
+import { PaginatePipe } from '../../pipes/paginate';
 
 @Component({
   selector: 'app-page-location',
-  imports: [CommonModule, Title, Text, PaginatePipe, ShowcaseCharacters, Loader],
+  imports: [CommonModule, Title, Text, PaginatePipe, ShowcaseCharacters, Loader, Link],
   templateUrl: './location.html',
   styleUrl: './location.scss',
 })
 export class Location implements OnChanges, OnInit, OnDestroy {
   locationsFacade = inject(LocationsFacade);
   route = inject(ActivatedRoute);
-
+  dimensionsRoute = routesConstants.ROUTE_DIMENSION;
   @Input() currentLocation = 55;
   @Input() id!: string;
 
