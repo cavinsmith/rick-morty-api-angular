@@ -1,32 +1,55 @@
 @if (character) {
-    <div class="character-card-wrapper">
-        <mat-card class="character-card">
-        <mat-card-header class="character-header">
-            <div mat-card-avatar class="character-header-image" [ngStyle]="{'background-image': 'url(' + character.image + ')'}"></div>
-            <mat-card-title>{{character.name}}</mat-card-title>
-            <mat-card-subtitle>{{character.species}}</mat-card-subtitle>
-        </mat-card-header>
-        <div mat-card-image class="character-image" [ngStyle]="{'background-image': 'url(' + character.image + ')'}"></div>
-        <mat-card-content>
-            <p>
-                Status: {{character.status}}<br>
-                Gender: {{character.gender}}<br>
-                @if(character.origin) {
-                    Origin:
-                    @if( character.origin.url === "") {
-                        <span>{{character.origin.name}}</span><br>
-                    } @else {
-                        <app-link [link]="['/', locationRouterLink, character.origin.url | extractId]" [text]="character.origin.name"></app-link><br>
-                    }
-                    Location:
-                    @if(character.location.url === "") {
-                        <span>{{character.location.name}}</span><br>
-                    } @else {
-                        <app-link [link]="['/', locationRouterLink, character.location.url | extractId]" [text]="character.location.name"></app-link>
-                    }
-                }
-            </p>
-        </mat-card-content>
-        </mat-card>
-    </div>
+  <div class="character-card-wrapper">
+    <mat-card class="character-card">
+      <mat-card-header class="character-header">
+        <div
+          mat-card-avatar
+          class="character-header-image"
+          [ngStyle]="{ 'background-image': 'url(' + character.image + ')' }"
+        ></div>
+        <mat-card-title>{{ character.name }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ character.species }}
+
+          @if (character.type) {
+            <span>({{ character.type }})</span>
+          }
+        </mat-card-subtitle>
+      </mat-card-header>
+      <div
+        mat-card-image
+        class="character-image"
+        [ngStyle]="{ 'background-image': 'url(' + character.image + ')' }"
+      ></div>
+      <mat-card-content>
+        <p>
+          Status: {{ character.status }}<br />
+          Gender: {{ character.gender }}<br />
+          @if (character.origin) {
+            Origin:
+            @if (character.origin.url === '') {
+              <span>{{ character.origin.name }}</span
+              ><br />
+            } @else {
+              <app-link
+                [link]="['/', locationRouterLink, character.origin.url | extractId]"
+                [text]="character.origin.name"
+              ></app-link
+              ><br />
+            }
+            Location:
+            @if (character.location.url === '') {
+              <span>{{ character.location.name }}</span
+              ><br />
+            } @else {
+              <app-link
+                [link]="['/', locationRouterLink, character.location.url | extractId]"
+                [text]="character.location.name"
+              ></app-link>
+            }
+          }
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 }
