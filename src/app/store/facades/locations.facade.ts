@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as LocationsActions from '../actions/locations.actions';
 import { Location } from '../models/location.model';
@@ -12,8 +12,7 @@ export class LocationsFacade extends GenericRecordFacade<Location> {
   protected loadAction = LocationsActions.loadLocation;
   protected selectRecord = selectLocation;
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(store: Store) {
-    super(store);
+  constructor() {
+    super(inject(Store));
   }
 }

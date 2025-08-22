@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as EpisodesActions from '../actions/episodes.actions';
 import { Episode } from '../models/episode.model';
@@ -12,8 +12,7 @@ export class EpisodesFacade extends GenericRecordFacade<Episode> {
   protected loadAction = EpisodesActions.loadEpisode;
   protected selectRecord = selectEpisode;
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(store: Store) {
-    super(store);
+  constructor() {
+    super(inject(Store));
   }
 }

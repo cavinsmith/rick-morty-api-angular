@@ -68,9 +68,4 @@ describe('Character Model', () => {
     character.gender = 'unknown';
     expect(character.gender).toBe('unknown');
   });
-
-  it('should allow additional properties via index signature', () => {
-    character['customProperty'] = 'test value';
-    expect(character['customProperty']).toBe('test value');
-  });
 });

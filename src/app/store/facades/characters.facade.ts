@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as CharactersActions from '../actions/characters.actions';
 import { Character } from '../models/character.model';
@@ -14,8 +14,7 @@ export class CharactersFacade extends GenericRecordFacade<Character> {
   protected selectRecord = selectCharacter;
   protected override selectManyRecords = selectMultipleCharacters;
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(store: Store) {
-    super(store);
+  constructor() {
+    super(inject(Store));
   }
 }

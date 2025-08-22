@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EpisodeFilter } from 'rickmortyapi';
 import { GenericPagesFacade } from './generic-pages.facade';
@@ -20,8 +20,7 @@ export class EpisodesPagesFacade extends GenericPagesFacade<Episode[], EpisodeFi
   protected selectTotalPagesAndItems = selectEpisodesTotalPagesAndItems;
   protected selectPageIsLoaded = selectEpisodesPageIsLoaded;
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(store: Store) {
-    super(store);
+  constructor() {
+    super(inject(Store));
   }
 }

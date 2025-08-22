@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LocationFilter } from 'rickmortyapi';
 import * as LocationsPagesActions from '../actions/locations-pages.actions';
@@ -19,8 +19,7 @@ export class LocationsPagesFacade extends GenericPagesFacade<Location[], Locatio
   protected selectTotalPagesAndItems = selectLocationsTotalPagesAndItems;
   protected selectPageIsLoaded = selectLocationsPageIsLoaded;
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(store: Store) {
-    super(store);
+  constructor() {
+    super(inject(Store));
   }
 }
