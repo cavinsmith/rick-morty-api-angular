@@ -1,6 +1,13 @@
-# RickMortyApiAngular
+# Rick and Morty API
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+## Features
+
+- Search for Locations / List Dimensions -> Show all characters from location paginated in form of a card
+- Search for Episodes / List Episodes -> Show all characters from episodes paginated in form of a card
+- Search for Dimensions / List Dimensions -> Show all characters from dimensions paginated in form of a card
+- Search for Characters / List Characters -> Show all characters paginated in form of a card
+- Individual page of Character from list of Characters
+- Error handling for API requests (snackbar notifications)
 
 ## Development server
 
@@ -11,20 +18,6 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
 
 ## Building
 
@@ -46,14 +39,8 @@ ng test
 
 ## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+For end-to-end (e2e) testing, run `ng serve` and in separate window:
 
 ```bash
-ng e2e
+cypress run
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
